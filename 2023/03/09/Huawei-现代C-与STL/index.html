@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="Franky">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/03/09/huawei-现代c-与stl/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Huawei: 现代C++与STL">
+    <meta property="og:description" content="Hexo Theme Redefine">
+    <meta property="og:url" content="http://example.com2023/03/09/Huawei-现代C-与STL/">
+    <meta property="og:image" content="/images/redefine-logo.svg">
+    <meta property="og:site_name" content="Franky&#39;s Blog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Huawei: 现代C++与STL">
+    <meta name="twitter:description" content="Hexo Theme Redefine">
+    <meta name="twitter:image" content="/images/redefine-logo.svg">
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
+    <meta name="theme-color" content="#005080">
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+    <title>
+        
+            Huawei: 现代C++与STL -
+        
+        Franky&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    
+    
+    
+    
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"https://evan.beee.top/img/wallhaven-wqery6-light.webp","dark":"https://evan.beee.top/img/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"当你在银河目睹着我的平凡，而我在人间甚至不敢抬头看","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.1.6","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
+    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="menu-wrapper">
+    
+    <div class="menu-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Franky&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                            <li class="menu-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="menu-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                    <li class="drawer-menu-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">Huawei: 现代C++与STL</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Franky</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2023-03-09 21:35:59</span>
+        <span class="mobile">2023-03-09 21:35</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="pc">2023-03-09 21:36:17</span>
+            <span class="mobile">2023-03-09 21:36</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="现代C-与STL"><a href="#现代C-与STL" class="headerlink" title="现代C++与STL"></a>现代C++与STL</h1><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><ul>
+<li><p>建在堆上，可伸缩，可能有预留空间的动态数组</p>
+</li>
+<li><p>end()只能用于表示位置，不能用于访问元素</p>
+</li>
+<li><p>vector构造&#x2F;析构&#x2F;拷贝&#x2F;移动时，其中所有元素自动构造&#x2F;析构&#x2F;拷贝&#x2F;移动</p>
+</li>
+<li><p>增大capacity时，其实是把原vector复制一遍，再把新加入的元素拷贝到新的地址，然后释放原来的vector的内存。因此当capacity扩大后，原迭代器会失效。</p>
+</li>
+<li><p>如果元素类型是指针，vector不管指针所指向的对象的生命周期</p>
+</li>
+<li><p>&#96;&#96;&#96;cpp<br>vector<int> v(3);<br>v.push_back(1);<br>v.push_back(1);<br>&#x2F;&#x2F;v.capacity() &#x3D;&#x3D; 6<br>vector<int> v2 &#x3D; v;<br>&#x2F;&#x2F;v2.capacity() &#x3D;&#x3D; 5</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### vector的内存管理</span><br><span class="line"></span><br><span class="line">- 插入元素时，会分配新的内存空间，把pos之前的元素拷贝到新空间，插入新元素，再将pos及之后的元素拷贝到新空间，最后销毁原空间。**开销很大**</span><br><span class="line"></span><br><span class="line">## 迭代器</span><br><span class="line"></span><br><span class="line">- 迭代器支持原生指针的多数操作，vector的迭代器支持所有操作</span><br><span class="line"></span><br><span class="line">- **迭代器的有效性**</span><br><span class="line">  </span><br><span class="line">  有些容器的某些操作会使已创建的迭代器失效</span><br><span class="line">  </span><br><span class="line">  尽量避免在遍历的同时增删元素</span><br><span class="line"></span><br><span class="line">## 泛型算法</span><br><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">sort(vec.begin(), vec.end());</span><br><span class="line">sort(arr, arr + 3);</span><br><span class="line"></span><br><span class="line">//原生数组和其他容器都支持</span><br><span class="line">std::sort(std::begin(x), std::end(x));</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">std::string s1 = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">std::string s2 = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串常量是左值，所有内容相同的字符串常量都共用一个地址</span></span><br><span class="line">cout&lt;&lt;&amp;<span class="string">&quot;abc&quot;</span>&lt;&lt;endl;</span><br><span class="line">cout&lt;&lt;&amp;<span class="string">&quot;abc&quot;</span>&lt;&lt;endl;</span><br><span class="line"><span class="comment">/**输出</span></span><br><span class="line"><span class="comment">0x100a1bf94</span></span><br><span class="line"><span class="comment">0x100a1bf94</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>capacity和size永远相等，按需扩展，和vector的capacity成倍增长不同</p>
+</li>
+<li><p>尽可能使用std::string，不用c风格字符串</p>
+</li>
+</ul>
+<h2 id="固定宽度类型"><a href="#固定宽度类型" class="headerlink" title="固定宽度类型"></a>固定宽度类型</h2><ul>
+<li><p>C++内置类型的short、int、long等类型的字节宽度在不同平台是不一样的，应当优先使用C++11标准库定义的跨平台的固定宽度类型：<em>int8_t</em> <em>int16_t</em> <em>int32_t</em> <em>int64_t</em> <em>uint8_t</em> <em>uint16_t</em> <em>uint32_t</em> <em>uint64_t</em></p>
+</li>
+<li><p>printf等格式化函数中，格式化符是与内置类型绑定的，如%d对应int。使用固定宽度类型后，不应该再使用这类函数。</p>
+</li>
+</ul>
+<h2 id="byte"><a href="#byte" class="headerlink" title="byte"></a>byte</h2><ul>
+<li><p>将对象编码为字节信息（跨系统传递对象时）。以前经常使用char或unsigned char来表示字节</p>
+</li>
+<li><p>为避免歧义，C++17引入了<em>std::byte</em>类型，代表二进制bit内容，只能做位运算，不能直接赋值。</p>
+</li>
+<li><p>可用<em>static_cast</em>将其他类型转换成<em>byte</em></p>
+</li>
+<li><p>将对象编码为字节信息时，应当保证编码方式在任何平台上都是固定的，而不依赖于当前平台的内存字节布局。<strong>主流网络协议都是大端序</strong></p>
+</li>
+</ul>
+<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h2><ul>
+<li><p>防止未初始化变量、类型名太长</p>
+</li>
+<li><pre><code class="cpp">auto x = -1;
+cout &lt;&lt; boolalpha &lt;&lt; (x &lt; sizeof(x)) &lt;&lt; endl;
+//x被转换为unsigned，输出false
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 当想要的类型不是*int*时，不要使用*auto+整数数字*初始化</span><br><span class="line"></span><br><span class="line">- 不要在表达式中混用有符号和无符号类型</span><br><span class="line"></span><br><span class="line">- auto不会自动添加const、引用等类型（使用模板推导类型）</span><br><span class="line">  </span><br><span class="line">  ```cpp</span><br><span class="line">  int &amp;getRef();</span><br><span class="line">  int main()</span><br><span class="line">  &#123;</span><br><span class="line">      //这里x是int，而不是int&amp;</span><br><span class="line">      auto x = getRef();</span><br><span class="line">  </span><br><span class="line">      //int &amp;</span><br><span class="line">      auto &amp;y = getRef();</span><br><span class="line">  </span><br><span class="line">      //const int</span><br><span class="line">      const auto z = x + 1;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></div>
+</code></pre>
+</li>
+<li><p>使用auto &amp;时，总是得到引用，且const属性会被保留</p>
+</li>
+<li><p>auto不可能推导出原生数组，<em>原因是不能用一个数组直接初始化另一个数组</em></p>
+</li>
+<li><p>auto可以用于推导函数返回值，前提是函数定义可见、每个return表达式类型一致。<em>如果函数定义在当前文件不可见，则编译器无法推导返回值类型，报编译错误。</em></p>
+</li>
+</ul>
+<h2 id="统一-初始化"><a href="#统一-初始化" class="headerlink" title="统一{}初始化"></a>统一{}初始化</h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//多种初始化方式</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">x</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="type">int</span> y = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> z = &#123;<span class="number">0</span>&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>在C++11中，*{}初始化方式*适用于所有初始化场景</p>
+</li>
+<li><p><em>{}初始化</em>不允许implicit缩窄转换</p>
+</li>
+<li><p>大括号列表在某些时候会被自动转换为<em>std::initializer_list<T></em> 类型，此时每个元素的类型必须一样</p>
+</li>
+<li><p><em>std::initializer_list<T></em> 中的元素不能修改。他只是对原始大括号列表的数据引用，其本身的复制开销很小，没有必要传递它的引用。</p>
+</li>
+<li><p>不要直接保存<em>std::initializer_list<T></em> ，以免发生悬空引用</p>
+</li>
+<li><p>可以通过添加<em>std::initializer_list<T></em> 参数的构造函数，让自定义的类支持统一初始化</p>
+</li>
+<li><p>大括号列表表达式没有类型，不能用于模板参数类型推导。但如果确定类型为<em>initializer_list</em> ，则大括号列表可以自动转换为<em>initializer_list</em></p>
+</li>
+</ul>
+<h2 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h2><ul>
+<li><p><em>const</em>修饰的变量，其值不能修改，但其值不一定能在编译器确定</p>
+</li>
+<li><p><em>constexpr</em>确保在编译期实现求值，可以用于数组长度和模板参数。</p>
+</li>
+<li><p>使用<em>constexpr</em>有利于编译器做更好的优化</p>
+</li>
+<li><p><em>constexpr</em>常量初始化时，其值必须在编译时就能算出来，因此不能使用普通变量和普通函数，但可以使用<em>constexpr</em>的变量和函数</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="type">int</span> x = <span class="number">5</span>;    <span class="comment">//👌</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="type">int</span> y = x + <span class="number">1</span>;<span class="comment">//👌  </span></span><br><span class="line"><span class="type">int</span> m = x;              <span class="comment">//👌</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="type">int</span> z = m;    <span class="comment">//だめ</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="type">double</span> w = std::<span class="built_in">pow</span>(<span class="number">1</span>, <span class="number">2.0</span>);<span class="comment">//だめ</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><em>constexpr</em>函数可以在运行时调用</p>
+</li>
+<li><p><em>constexpr</em>函数隐含inline属性，因此对外提供的接口一般直接定义在头文件中</p>
+</li>
+<li><p>尽可能把函数定义成<em>constexpr</em>，但是一个函数要能参与编译期计算，必须符合一定条件</p>
+<ul>
+<li><p><em>constexpr</em>函数内只能调用<em>constexpr</em>函数（C库、C++17库的函数都不是<em>constexpr</em>）</p>
+</li>
+<li><p>禁止分配堆内存（如很多容器）（从C++20开始，大部分容器可以在<em>constexpr</em>中使用）</p>
+</li>
+<li><p>函数内的局部变量必须在声明时初始化</p>
+</li>
+<li><p>不会抛出异常、不能带虚函数、没有指针类型的转换</p>
+</li>
+</ul>
+</li>
+<li><p>构造函数也可以是<em>constexpr</em></p>
+</li>
+</ul>
+<h2 id="static-assert编译期校验"><a href="#static-assert编译期校验" class="headerlink" title="static_assert编译期校验"></a>static_assert编译期校验</h2><h2 id="std-array"><a href="#std-array" class="headerlink" title="std::array"></a>std::array</h2><ul>
+<li><p>类似传统数组，内部元素必须是同一类型，大小必须在编译时已知</p>
+</li>
+<li><p>用<em>size()</em> 直接获取元素个数</p>
+</li>
+<li><p>传参时不会退化为指针</p>
+</li>
+<li><p>使用<em>at()</em> 方法，越界时会抛出异常</p>
+</li>
+<li><p>没有构造&#x2F;析构函数</p>
+</li>
+<li><p>初始化行为和普通数组一样</p>
+</li>
+<li><p>C++17可以同时推导类型和长度</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::array arr = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="comment">//指定类型后不能推导长度</span></span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h2 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h2><ul>
+<li><p>C++11新增右值引用，可以将对象内容移动，避免拷贝</p>
+</li>
+<li><p>对const T &amp;&amp;进行move，不会move，而是拷贝</p>
+</li>
+<li><p>所有参数都是左值</p>
+</li>
+</ul>
+<h2 id="x3D-delete"><a href="#x3D-delete" class="headerlink" title="&#x3D;delete"></a>&#x3D;delete</h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">      <span class="built_in">MyClass</span>(<span class="type">const</span> MyClass &amp;) = <span class="keyword">delete</span>;</span><br><span class="line">      MyClass &amp;<span class="keyword">operator</span> = (<span class="type">const</span> MyClass &amp;) = <span class="keyword">delete</span>;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="x3D-default"><a href="#x3D-default" class="headerlink" title="&#x3D;default"></a>&#x3D;default</h2><ul>
+<li><p>构造函数：对于有默认构造函数的成员，调用其默认构造函数，否则不赋予初始值</p>
+</li>
+<li><p>析构函数：队友有析构函数的成员，调用其析构函数</p>
+</li>
+<li><p>拷贝构造和拷贝赋值：依次调用每个成员的拷贝构造&#x2F;赋值</p>
+</li>
+<li><p>移动构造和移动赋值：依次调用每个成员的移动构造&#x2F;赋值</p>
+</li>
+<li><p><strong>小心浅拷贝</strong></p>
+</li>
+</ul>
+<h2 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h2><ul>
+<li><p>不允许拷贝，只允许移动</p>
+</li>
+<li><p>实现了解引用(*)，成员访问(-&gt;)，和其他指针比较(&#x3D;&#x3D;)，在使用时和普通指针一样</p>
+</li>
+<li><p>使用<em>std::make_unique<T></em></p>
+</li>
+</ul>
+<h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h2><ul>
+<li><p>一个对象多处使用，不确定最后由谁释放</p>
+</li>
+<li><p><em>std::make_shared<T></em></p>
+</li>
+<li><p>当对象之间出现循环引用时，会导致引用计数永不减为0，导致内存泄漏</p>
+</li>
+<li><p>当能确定对象的所有权时，使用<em>unique_ptr</em></p>
+</li>
+</ul>
+<h2 id="函数对象-amp-lambda函数"><a href="#函数对象-amp-lambda函数" class="headerlink" title="函数对象 &amp; lambda函数"></a>函数对象 &amp; lambda函数</h2><ul>
+<li><p>lambda函数：在需要使用函数对象的地方，让编译器自动生成一个</p>
+</li>
+<li><p>编译器自动生成的lambda函数对象没有类名，只能用<em>decltype</em> 获取类型。任意两个lambda的类型都不同</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> thres = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">auto</span> lambdaA = [thres](<span class="type">int</span> x) &#123;<span class="keyword">return</span> x &lt; thres;&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>开销很大的对象应该按引用捕获</li>
+</ul>
+</li>
+<li><p>保存的引用不能超过引用对象的生命周期</p>
+</li>
+<li><p>默认不允许修改，相当于<em>operator()</em> 函数加上了<em>const</em> 。如果需要修改，需要explicitly添加mutable</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> thres = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">auto</span> lambdaB = [thres](<span class="type">int</span> x) <span class="keyword">mutable</span> &#123;<span class="keyword">return</span> ++x &lt; ++thres;&#125;;</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h2 id="Range-Based-Loop"><a href="#Range-Based-Loop" class="headerlink" title="Range-Based Loop"></a>Range-Based Loop</h2><ul>
+<li>可给自定义的类实现<em>begin()</em> 和<em>end()</em> 从而实现range-based loop</li>
+</ul>
+<h2 id="带有作用域的enum"><a href="#带有作用域的enum" class="headerlink" title="带有作用域的enum"></a>带有作用域的enum</h2>
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Huawei: 现代C++与STL</li>
+        <li>Post author：Franky</li>
+        <li>Create time：2023-03-09 21:35:59</li>
+        <li>
+            Post link：https://franky.pro/2023/03/09/Huawei-现代C-与STL/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/03/09/Huawei-%E5%AE%89%E5%85%A8%E7%BC%96%E7%A0%81-%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Huawei: 安全编码&amp;代码坏味道</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Huawei: 现代C++与STL</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3C-%E4%B8%8ESTL"><span class="nav-text">现代C++与STL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vector"><span class="nav-text">vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string"><span class="nav-text">string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BA%E5%AE%9A%E5%AE%BD%E5%BA%A6%E7%B1%BB%E5%9E%8B"><span class="nav-text">固定宽度类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#byte"><span class="nav-text">byte</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#auto"><span class="nav-text">auto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">统一{}初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#constexpr"><span class="nav-text">constexpr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-assert%E7%BC%96%E8%AF%91%E6%9C%9F%E6%A0%A1%E9%AA%8C"><span class="nav-text">static_assert编译期校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-array"><span class="nav-text">std::array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8"><span class="nav-text">右值引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x3D-delete"><span class="nav-text">&#x3D;delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x3D-default"><span class="nav-text">&#x3D;default</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unique-ptr"><span class="nav-text">unique_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shared-ptr"><span class="nav-text">shared_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1-amp-lambda%E5%87%BD%E6%95%B0"><span class="nav-text">函数对象 &amp; lambda函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Range-Based-Loop"><span class="nav-text">Range-Based Loop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84enum"><span class="nav-text">带有作用域的enum</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">Franky</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br> 
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.1.6</a>
+        </div>
+        
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="
+                
+                https://beian.miit.gov.cn
+                
+                ">豫ICP备2022020092号</a></div>
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="
+                
+                    https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41031102000540
+                
+                ">豫网公安备案41031102000540号</a></div>
+        
+        
+        
+            <div id="start_time_div" style="display:none">
+                2023/3/9 20:00:00
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="unfolded-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="folded-tools-list">
+        <li class="right-bottom-tools tool-toggle-show flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/menu-shrink.js"></script>
+
+<script src="/js/tools/go-top-bottom.js"></script>
+
+<script src="/js/tools/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/code-block.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

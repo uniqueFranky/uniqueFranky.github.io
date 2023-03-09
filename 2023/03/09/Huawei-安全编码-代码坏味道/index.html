@@ -9,18 +9,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2023/03/09/swift调用c-函数/"/>
+    <link rel="canonical" href="http://example.com/2023/03/09/huawei-安全编码-代码坏味道/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Swift调用C++函数">
+    <meta property="og:title" content="Huawei: 安全编码&amp;代码坏味道">
     <meta property="og:description" content="Hexo Theme Redefine">
-    <meta property="og:url" content="http://example.com2023/03/09/Swift调用C-函数/">
+    <meta property="og:url" content="http://example.com2023/03/09/Huawei-安全编码-代码坏味道/">
     <meta property="og:image" content="/images/redefine-logo.svg">
     <meta property="og:site_name" content="Franky&#39;s Blog">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Swift调用C++函数">
+    <meta name="twitter:title" content="Huawei: 安全编码&amp;代码坏味道">
     <meta name="twitter:description" content="Hexo Theme Redefine">
     <meta name="twitter:image" content="/images/redefine-logo.svg">
     <!--- Icon Part-->
@@ -31,7 +31,7 @@
     
     <title>
         
-            Swift调用C++函数 -
+            Huawei: 安全编码&amp;代码坏味道 -
         
         Franky&#39;s Blog
     </title>
@@ -182,7 +182,7 @@
             
             
                 <div class="article-title">
-                    <h1 class="article-title-regular">Swift调用C++函数</h1>
+                    <h1 class="article-title-regular">Huawei: 安全编码&amp;代码坏味道</h1>
                 </div>
             
                 
@@ -204,15 +204,15 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="pc">2023-03-09 21:29:06</span>
-        <span class="mobile">2023-03-09 21:29</span>
+        <span class="pc">2023-03-09 21:35:29</span>
+        <span class="mobile">2023-03-09 21:35</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="pc">2023-03-09 21:31:12</span>
-            <span class="mobile">2023-03-09 21:31</span>
+            <span class="pc">2023-03-09 21:35:40</span>
+            <span class="mobile">2023-03-09 21:35</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -236,44 +236,339 @@
             
 
             <div class="article-content markdown-body">
-                <h1 id="Swift调用C-函数"><a href="#Swift调用C-函数" class="headerlink" title="Swift调用C++函数"></a>Swift调用C++函数</h1><h2 id="背景（可略过）"><a href="#背景（可略过）" class="headerlink" title="背景（可略过）"></a>背景（可略过）</h2><p>字节跳动青训营要求写一个华容道游戏，实现 <strong>一键求解</strong> 的功能。刚开始用Swift写了个暴力的BFS，但是实在是太慢了，我觉得可能是Swift效率太低造成的，所以就想用C++写这个BFS。<em>就这样，我的折磨旅途开始了</em>。</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>总体来说，<strong>Swift</strong>调用**C++**函数的步骤如下：</p>
+                <h1 id="安全编码-amp-代码坏味道"><a href="#安全编码-amp-代码坏味道" class="headerlink" title="安全编码&amp;代码坏味道"></a>安全编码&amp;代码坏味道</h1><h2 id="安全编码"><a href="#安全编码" class="headerlink" title="安全编码"></a>安全编码</h2><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><ul>
+<li><p>安全编码之基本思想</p>
 <ul>
-<li>写好C++函数</li>
-<li>使用Objective-C把C++函数封装一层</li>
-<li>将Objective-C封装好的函数桥接到Swift</li>
-<li>在Swift中调用前，做好类型转化</li>
+<li><p>程序在处理外部数据时必须经过严格的合法性校验</p>
+</li>
+<li><p>禁用不用的端口，尽量减少代码的攻击面</p>
+</li>
+<li><p>编码在一定范围内应该对不信任模块间采取防御式编程，以此来弥补潜在的人工疏忽</p>
+</li>
 </ul>
-<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><p>这里就以我的华容道为例子了。</p>
-<p>项目结构如下</p>
-<p>其中主要关注**CppSolver.hpp CppSolver.cpp CppWrapper.h CppWrapper.mm Klotski-Bridging-Header.h **即可，这是在Swift调用C++函数中起到关键作用的文件。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://img2022.cnblogs.com/blog/842101/202208/842101-20220819190046463-1696596445.png"
-                     
-                ></p>
-<h3 id="1-写好C-函数"><a href="#1-写好C-函数" class="headerlink" title="1.写好C++函数"></a>1.写好C++函数</h3><p><strong>CppSolver.hpp</strong>如下</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> CppSolver_hpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CppSolver_hpp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="type">int</span> getNum(<span class="type">int</span> x);</span><br><span class="line">    <span class="type">char</span> *solveGame(<span class="type">char</span> *gameString);</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* CppSolver_hpp */</span></span></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>注意这里的extern “C”</strong></p>
-<p>之前没有加这个，一直报错，上网搜了之后，发现要加上这个。</p>
-<p><strong>CppSolver.cpp</strong>如下</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;CppSolver.hpp&quot;</span></span></span><br><span class="line"><span class="type">char</span> *solveGame(<span class="type">char</span>* gameString) &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        Do Something </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hahahah&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="2-使用Objective-C封装C-函数"><a href="#2-使用Objective-C封装C-函数" class="headerlink" title="2.使用Objective-C封装C++函数"></a>2.使用<strong>Objective-C</strong>封装C++函数</h3><p><strong>CppWrapper.h</strong>如下</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> CppWrapper_h</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CppWrapper_h</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#import <span class="string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> CppStruct;</span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CppWrapper</span>: <span class="title">NSObject</span></span></span><br><span class="line">- (<span class="type">char</span> *) solveGame_Wrapped: (<span class="built_in">NSString</span> *) gameString;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* CppWrapper_h */</span></span></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>CppWrapper.mm</strong>如下</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="string">&quot;CppWrapper.h&quot;</span></span></span><br><span class="line"><span class="meta">#import <span class="string">&quot;CppSolver.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CppWrapper</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="type">int</span>) getNum_Wrapped: (<span class="type">int</span>)x &#123;</span><br><span class="line"><span class="comment">//    struct CppStruct *cs = CppStruct(1, 2);</span></span><br><span class="line">    <span class="keyword">return</span> getNum(x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">char</span> *) solveGame_Wrapped: (<span class="built_in">NSString</span> *) gameString &#123;</span><br><span class="line">    <span class="keyword">return</span> solveGame([gameString UTF8String]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></div>
-
-<h3 id="3-把Objective-C封装好的C-函数桥接到Swift"><a href="#3-把Objective-C封装好的C-函数桥接到Swift" class="headerlink" title="3.把Objective-C封装好的C++函数桥接到Swift"></a>3.把Objective-C封装好的C++函数<strong>桥接</strong>到Swift</h3><p>在创建Objective-C文件时，Xcode会提醒是否要建立<strong>桥接文件</strong>，这里我们要选择是，也就是创建了Klotski-Bridging-Header.h：</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Use this file to import your target&#x27;s public headers that you would like to expose to Swift.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="meta">#import <span class="string">&quot;CppWrapper.h&quot;</span></span></span><br></pre></td></tr></table></figure></div>
-
-<h3 id="4-在Swift中调用Objective-C函数"><a href="#4-在Swift中调用Objective-C函数" class="headerlink" title="4.在Swift中调用Objective-C函数"></a>4.在<strong>Swift</strong>中调用Objective-C函数</h3><p>注意做好类型转换</p>
-<div class="highlight-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">solveByPersonControllers</span>(<span class="keyword">_</span> <span class="params">personControllers</span>: [<span class="type">PersonController</span>]) &#123;</span><br><span class="line">        <span class="keyword">let</span> game <span class="operator">=</span> <span class="type">GameStatusForCpp</span>(personControllers: personControllers)</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> gameData <span class="operator">=</span> <span class="keyword">try?</span> <span class="type">JSONEncoder</span>().encode(game) <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">fatalError</span>(<span class="string">&quot;unexpected game status <span class="subst">\(game)</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> gameString <span class="operator">=</span> <span class="type">String</span>(data: gameData, encoding: .utf8) <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">fatalError</span>(<span class="string">&quot;unexpected gameData <span class="subst">\(gameData)</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> cppWrapper <span class="operator">=</span> <span class="type">CppWrapper</span>()</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> solveChars <span class="operator">=</span> cppWrapper.solveGame_Wrapped(gameString) <span class="keyword">else</span> &#123; <span class="built_in">fatalError</span>() &#125;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> solveStr <span class="operator">=</span> <span class="type">String</span>(cString: solveChars, encoding: .utf8) <span class="keyword">else</span> &#123; <span class="built_in">fatalError</span>() &#125;</span><br><span class="line">        <span class="built_in">print</span>(solveStr)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><p>建议需要用到复杂的数据类型（类、结构体）的时候，可以传递<strong>json字符串</strong>（我上面的代码就是这样做的），因为我暂时还没找到更好的方法可以让Swift和C++使用共同的结构。至于C++的json处理，有一个比较好用的库，是腾讯的<a class="link"   target="_blank" rel="noopener" href="https://github.com/Tencent/rapidjson" >rapidjson <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。<br>C++的返回值类型应该需要是Objective-C和Swift里都有的类型</p>
+</li>
+</ul>
+<h3 id="HCSEC黄金规则"><a href="#HCSEC黄金规则" class="headerlink" title="HCSEC黄金规则"></a>HCSEC黄金规则</h3><ul>
+<li><p>多所有的外部数据进行边界和格式检查</p>
+</li>
+<li><p>对于内部数据需要划分信任域进行检查</p>
+</li>
+<li><p>在形成系统执行命令前经过充分净化</p>
+</li>
+<li><p>只有线程安全的代码才能应用在多线程中</p>
+<ul>
+<li><p>所有STL只支持同时读，只要有一个线程发生写操作，其他线程都可能存在问题</p>
+</li>
+<li><p>尽量减少全局变量、静态变量或单例的使用，控制共享的变量的作用域</p>
+</li>
+</ul>
+</li>
+<li><p>避免重复代码</p>
+</li>
+<li><p>废弃代码存在安全隐患</p>
+<ul>
+<li>未编译、未链接的代码，以及注释的代码的安全问题仍然是安全问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="安全编程规范"><a href="#安全编程规范" class="headerlink" title="安全编程规范"></a>安全编程规范</h3><ul>
+<li><p>字符串与数组操作</p>
+<ul>
+<li><p>确保有足够的存储空间，防止缓冲区溢出</p>
+</li>
+<li><p>调用格式化函数时，禁止format参数由外部可控，否则可能造成字符串格式化漏洞</p>
+<ul>
+<li><p>若在调用printf时没有传入参数列表，那么printf会按照format格式去栈中取对应的参数（地址偏移）</p>
+</li>
+<li><p>可以利用编译器检查格式化参数类型与实际参数的匹配性：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add_definitions(-DSECUREC_SUPPORT_FORMAT_WARNING=1)</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>正确使用安全函数</p>
+<ul>
+<li><p>安全函数增强了哪些安全特性？</p>
+<ul>
+<li><p>强化边界检查：在接口参数中增加buffer长度的参数</p>
+</li>
+<li><p>保证字符串以’\0’结尾，防止防伪buffer边界之外的信息</p>
+</li>
+<li><p>发生缓冲区溢出时，将目的缓冲区的首字节置为0</p>
+</li>
+</ul>
+</li>
+<li><p>正确设置安全函数中的destMax参数（包含结束符）</p>
+</li>
+<li><p>数组或指针作为函数参数时，必须同时将其长度作为函数的参数</p>
+</li>
+<li><p>常见错误</p>
+<ul>
+<li><p>使用宏、常量或魔鬼数字作为destMax</p>
+</li>
+<li><p>参数是数组，使用形参中数组的长度</p>
+<ul>
+<li>形参看上去数组有长度，但实际上会退化为指针</li>
+</ul>
+</li>
+<li><p>使用宏或函数对安全函数进行封装</p>
+</li>
+</ul>
+</li>
+<li><p>必须检查安全函数的返回值，并进行正确的处理</p>
+</li>
+</ul>
+</li>
+<li><p>整数</p>
+<ul>
+<li><p>注意溢出</p>
+</li>
+<li><p>除法和取模时保证除数不为0</p>
+</li>
+</ul>
+</li>
+<li><p>内存</p>
+<ul>
+<li><p>在做内存操作时，应该做好严格的边界校验</p>
+</li>
+<li><p>空指针、已经释放的野指针</p>
+</li>
+<li><p>尽量使用引用、智能指针，而非指针</p>
+</li>
+</ul>
+</li>
+<li><p>文件操作</p>
+<ul>
+<li><p>不规范的文件路径，导致文件泄露</p>
+<ul>
+<li>使用realpath函数对路径进行规范化，之后再对路径进行校验</li>
+</ul>
+</li>
+<li><p>打开文件后不关闭，导致文件句柄耗尽而无法打开文件</p>
+<ul>
+<li>尽量使用守护类、自定义析构的unique_ptr</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="代码坏味道"><a href="#代码坏味道" class="headerlink" title="代码坏味道"></a>代码坏味道</h2><ul>
+<li>代码坏味道： <strong>《重构 改善既有代码的设计》By Martin Fowler</strong></li>
+</ul>
+<h3 id="一、-代码坏味道概述"><a href="#一、-代码坏味道概述" class="headerlink" title="一、 代码坏味道概述"></a>一、 代码坏味道概述</h3><ul>
+<li><p>代码坏味道不是功能性问题，主要表现为 <strong>可读性</strong> 和 <strong>可维护性</strong> 的一些问题</p>
+</li>
+<li><p>常见的代码坏味道： <strong>冗余和重复</strong> 、 <strong>局部膨胀</strong> 、 <strong>耦合结构不良</strong></p>
+</li>
+<li><p>不同层次的坏味道</p>
+<ul>
+<li><p>直观： 一般为规范性问题，可以通过代码扫描工具识别。</p>
+</li>
+<li><p>微观： 主要为软件细节设计的问题，一般比较具体明确，可以通过查看代码进行识别。</p>
+</li>
+<li><p>宏观： 代码架构上的整体的问题，主要为软件高系统设计的问题，一般比较主观抽象，需要结合业务领域知识进行识别。 <em>例：类职责不单一</em></p>
+</li>
+</ul>
+</li>
+<li><p>不同类别的坏味道</p>
+<ul>
+<li><p>膨胀剂： 太长的方法、太大的类、太多参数、基本类型偏执、数据泥团</p>
+</li>
+<li><p>滥用OO：switch语句（可以用多态）、临时字段、被拒绝的馈赠（为避免组合而使用继承）、异曲同工的类</p>
+</li>
+<li><p>难以修改： 发散式修改（类&#x2F;函数承载了过多功能）、霰弹式修改（有一处修改，其他地方也需要修改）</p>
+</li>
+<li><p>可有可无：注释、重复代码、冗赘类&#x2F;元素、数据类、死代码、夸夸其谈未来性</p>
+</li>
+<li><p>耦合： 依恋情结（需要调用一堆接口来实现一个功能）、内幕交易、消息链、中间人</p>
+</li>
+<li><p>神秘命名、全局数据、可变数据、循环语句</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、-冗余和重复"><a href="#二、-冗余和重复" class="headerlink" title="二、 冗余和重复"></a>二、 冗余和重复</h3><ul>
+<li><p>重复代码 Duplicated Code</p>
+<ul>
+<li><p>多个地点有同样的程序片段</p>
+</li>
+<li><p><strong>万恶之源</strong> 一旦变化，到处修改，漏改一处就是bug</p>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li><p>同一个类的两个函数有重复代码： 提取</p>
+</li>
+<li><p>互为兄弟的类有重复代码： 移到父类</p>
+</li>
+<li><p>互为兄弟的类有相似代码： 在父类创建模板方法，差异部分交给子类实现</p>
+</li>
+<li><p>毫不相关的类出现重复： 先提炼到一个类里，然后在另一个类里使用</p>
+</li>
+</ul>
+</li>
+<li><p><strong>CAUTION</strong> 过多消除重复可能会增强耦合</p>
+</li>
+</ul>
+</li>
+<li><p>过多注释 Comments</p>
+<ul>
+<li><p>冗余注释之所以存在，是因为代码很糟糕</p>
+</li>
+<li><p>破坏可读性，有些误导性的注释让维护人员陷入困境</p>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li><p>用来解释一段代码用来做什么时，把它提取成函数，修改函数名</p>
+</li>
+<li><p>注释why，而不仅是how和what</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>夸夸其谈未来性 Speculative Generality</p>
+<ul>
+<li><p>过度关注未来可能的变化，增加了一些不必要的东西</p>
+</li>
+<li><p>滥用设计模式，导致难以找到主要的逻辑走向</p>
+</li>
+<li><p>过度的设计导致代码不易理解、错误不易定位，可能还会降低代码执行的效率</p>
+</li>
+<li><p>放置过量的callback或特殊情况来处理一些非必要的事情</p>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li><p>如果某个抽象类没有太大作用，使用折叠层次Collapse Hierarchy删除抽象类</p>
+</li>
+<li><p>非必要的delegation可以使用内联类Inline Class代替</p>
+</li>
+<li><p>函数的某些参数未被使用，可以实施Remove Parameter</p>
+</li>
+<li><p>函数名称带有多余的意味，应该实施Rename Method让他现实一点</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ul>
+<li><p>太多参数：把多个参数用类封装</p>
+</li>
+<li><p>switch： map + find</p>
+</li>
+<li><p>循环查找： find + lambda</p>
+</li>
+</ul>
+<h3 id="三、-局部膨胀"><a href="#三、-局部膨胀" class="headerlink" title="三、 局部膨胀"></a>三、 局部膨胀</h3><ul>
+<li><p>过长参数列表 Long Parameter List</p>
+<ul>
+<li><p>太长参数列表难以理解</p>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li><p>一个参数可以通过另一个参数查询时，使用以查询取代参数Replace Parameter with Query</p>
+</li>
+<li><p>多个参数属于同一个数据结构时，直接传入数据结构的对象以保持对象完整Preserve Whole Object</p>
+</li>
+<li><p>多个参数有关联，总是同时使用，可以引入参数对象Introduce Parameter Object</p>
+</li>
+<li><p>某个参数是标记用于区分函数行为的，移除标记参数Remove Flag Argument</p>
+</li>
+<li><p>多个函数有相同的参数，实际上是围绕这些参数工作，可以将多个函数组合成类Combine Functions into Class</p>
+</li>
+</ul>
+</li>
+<li><p>注意全局变量、静态变量等隐形传入的“参数”</p>
+</li>
+<li><p>常常同时存在 过长函数、数据泥团、基本类型偏执 等其他坏味道，需要一并消除</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、-耦合结构不良"><a href="#四、-耦合结构不良" class="headerlink" title="四、 耦合结构不良"></a>四、 耦合结构不良</h3><ul>
+<li><p>发散式变化Divergent Change</p>
+<ul>
+<li><p>某个模块因为不同的原因在不同的方向上变化</p>
+</li>
+<li><p>职责过多，理解困难</p>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li><p>按不同变化方向进行拆分</p>
+</li>
+<li><p>如果功能按照某种步骤进行，可以使用拆分阶段Split Phase将不同的阶段分开</p>
+</li>
+</ul>
+</li>
+<li><p>模块的职责是否单一根据所在架构层次的不同而不同</p>
+</li>
+</ul>
+</li>
+<li><p>霰弹式修改Shotgun Surgery</p>
+<ul>
+<li><p>代码维护时多处修改，容易遗漏</p>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li><p>将功能集中到一起，常用到搬移函数Move Function、搬移字段Move Field、搬移语句到函数Move Statements into Function 等搬移特性的重构手法，集中到负责的一个模块</p>
+</li>
+<li><p>如果功能本身在架构层次上不应该分开，可以使用内联函数Inline Function、内联类Inline Class</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>重复switch Repeated Switches</p>
+<ul>
+<li><p>解决方案</p>
+<ul>
+<li><p>面向对象的语言： 以多态取代条件表达式</p>
+</li>
+<li><p>面向过程的语言： 表驱动、策略模式</p>
+</li>
+</ul>
+</li>
+<li><p>不是所有switch都需要重构，以下情况需要重构</p>
+<ul>
+<li><p>类型码不断增加</p>
+</li>
+<li><p>单个case处理多件事</p>
+</li>
+<li><p>相同的switch语句分散在多处代码中</p>
+</li>
+</ul>
+</li>
+<li><p>遵循单一职责原则</p>
+</li>
+<li><p>减少N:1:N的调用</p>
+</li>
+</ul>
+</li>
+<li><p>临时字段Temporary Field</p>
+<ul>
+<li><p>某个变量仅为某种特定场景而设，或只在该对象某一段生命周期内生效</p>
+</li>
+<li><p>不易被理解，可能会被误用</p>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li><p>Extract Class</p>
+</li>
+<li><p>作为参数传递</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、-代码坏味道工程工具"><a href="#五、-代码坏味道工程工具" class="headerlink" title="五、 代码坏味道工程工具"></a>五、 代码坏味道工程工具</h3><ul>
+<li><p>静态检查工具Xlint、Clang、FindBugs、CheckStyle、SourceMonitor，结合IDE使用，可以在写代码时识别规范性代码坏味道</p>
+</li>
+<li><p>CodeDEX提交代码时识别规范性或更高层次的坏味道</p>
+</li>
+<li><p>代码度量工具</p>
+</li>
+</ul>
 
             </div>
 
@@ -281,11 +576,11 @@
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Swift调用C++函数</li>
+        <li>Post title：Huawei: 安全编码&amp;代码坏味道</li>
         <li>Post author：Franky</li>
-        <li>Create time：2023-03-09 21:29:06</li>
+        <li>Create time：2023-03-09 21:35:29</li>
         <li>
-            Post link：https://franky.pro/2023/03/09/Swift调用C-函数/
+            Post link：https://franky.pro/2023/03/09/Huawei-安全编码-代码坏味道/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -306,13 +601,13 @@
                         <div class="article-prev">
                             <a class="prev"
                             rel="prev"
-                            href="/2023/03/09/C-C-%E4%B8%AD%E7%9A%84const/"
+                            href="/2023/03/09/Huawei-%E7%8E%B0%E4%BB%A3C-%E4%B8%8ESTL/"
                             >
                                 <span class="left arrow-icon flex-center">
                                     <i class="fa-solid fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">C/C++中的const</span>
+                                    <span class="post-nav-title-item">Huawei: 现代C++与STL</span>
                                     <span class="post-nav-item">Prev posts</span>
                                 </span>
                             </a>
@@ -322,10 +617,10 @@
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/03/09/hello-world/"
+                            href="/2023/03/09/C-C-%E4%B8%AD%E7%9A%84const/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">Hello World</span>
+                                    <span class="post-nav-title-item">C/C++中的const</span>
                                     <span class="post-nav-item">Next posts</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -346,8 +641,8 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">On this page</div>
-        <div class="page-title">Swift调用C++函数</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift%E8%B0%83%E7%94%A8C-%E5%87%BD%E6%95%B0"><span class="nav-text">Swift调用C++函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%EF%BC%88%E5%8F%AF%E7%95%A5%E8%BF%87%EF%BC%89"><span class="nav-text">背景（可略过）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C"><span class="nav-text">具体操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%86%99%E5%A5%BDC-%E5%87%BD%E6%95%B0"><span class="nav-text">1.写好C++函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8Objective-C%E5%B0%81%E8%A3%85C-%E5%87%BD%E6%95%B0"><span class="nav-text">2.使用Objective-C封装C++函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%8A%8AObjective-C%E5%B0%81%E8%A3%85%E5%A5%BD%E7%9A%84C-%E5%87%BD%E6%95%B0%E6%A1%A5%E6%8E%A5%E5%88%B0Swift"><span class="nav-text">3.把Objective-C封装好的C++函数桥接到Swift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%9C%A8Swift%E4%B8%AD%E8%B0%83%E7%94%A8Objective-C%E5%87%BD%E6%95%B0"><span class="nav-text">4.在Swift中调用Objective-C函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E8%AE%AE"><span class="nav-text">建议</span></a></li></ol></li></ol>
+        <div class="page-title">Huawei: 安全编码&amp;代码坏味道</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%BC%96%E7%A0%81-amp-%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93"><span class="nav-text">安全编码&amp;代码坏味道</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%BC%96%E7%A0%81"><span class="nav-text">安全编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HCSEC%E9%BB%84%E9%87%91%E8%A7%84%E5%88%99"><span class="nav-text">HCSEC黄金规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83"><span class="nav-text">安全编程规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93"><span class="nav-text">代码坏味道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E6%A6%82%E8%BF%B0"><span class="nav-text">一、 代码坏味道概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%86%97%E4%BD%99%E5%92%8C%E9%87%8D%E5%A4%8D"><span class="nav-text">二、 冗余和重复</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E5%B1%80%E9%83%A8%E8%86%A8%E8%83%80"><span class="nav-text">三、 局部膨胀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E8%80%A6%E5%90%88%E7%BB%93%E6%9E%84%E4%B8%8D%E8%89%AF"><span class="nav-text">四、 耦合结构不良</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93%E5%B7%A5%E7%A8%8B%E5%B7%A5%E5%85%B7"><span class="nav-text">五、 代码坏味道工程工具</span></a></li></ol></li></ol></li></ol>
 
     </div>
 </div>

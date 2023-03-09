@@ -9,18 +9,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2023/03/09/swift调用c-函数/"/>
+    <link rel="canonical" href="http://example.com/2023/03/09/c-c-中的const/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Swift调用C++函数">
+    <meta property="og:title" content="C/C++中的const">
     <meta property="og:description" content="Hexo Theme Redefine">
-    <meta property="og:url" content="http://example.com2023/03/09/Swift调用C-函数/">
+    <meta property="og:url" content="http://example.com2023/03/09/C-C-中的const/">
     <meta property="og:image" content="/images/redefine-logo.svg">
     <meta property="og:site_name" content="Franky&#39;s Blog">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Swift调用C++函数">
+    <meta name="twitter:title" content="C/C++中的const">
     <meta name="twitter:description" content="Hexo Theme Redefine">
     <meta name="twitter:image" content="/images/redefine-logo.svg">
     <!--- Icon Part-->
@@ -31,7 +31,7 @@
     
     <title>
         
-            Swift调用C++函数 -
+            C/C++中的const -
         
         Franky&#39;s Blog
     </title>
@@ -182,7 +182,7 @@
             
             
                 <div class="article-title">
-                    <h1 class="article-title-regular">Swift调用C++函数</h1>
+                    <h1 class="article-title-regular">C/C++中的const</h1>
                 </div>
             
                 
@@ -204,15 +204,15 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="pc">2023-03-09 21:29:06</span>
-        <span class="mobile">2023-03-09 21:29</span>
+        <span class="pc">2023-03-09 21:33:45</span>
+        <span class="mobile">2023-03-09 21:33</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="pc">2023-03-09 21:31:12</span>
-            <span class="mobile">2023-03-09 21:31</span>
+            <span class="pc">2023-03-09 21:33:58</span>
+            <span class="mobile">2023-03-09 21:33</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -236,44 +236,40 @@
             
 
             <div class="article-content markdown-body">
-                <h1 id="Swift调用C-函数"><a href="#Swift调用C-函数" class="headerlink" title="Swift调用C++函数"></a>Swift调用C++函数</h1><h2 id="背景（可略过）"><a href="#背景（可略过）" class="headerlink" title="背景（可略过）"></a>背景（可略过）</h2><p>字节跳动青训营要求写一个华容道游戏，实现 <strong>一键求解</strong> 的功能。刚开始用Swift写了个暴力的BFS，但是实在是太慢了，我觉得可能是Swift效率太低造成的，所以就想用C++写这个BFS。<em>就这样，我的折磨旅途开始了</em>。</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>总体来说，<strong>Swift</strong>调用**C++**函数的步骤如下：</p>
-<ul>
-<li>写好C++函数</li>
-<li>使用Objective-C把C++函数封装一层</li>
-<li>将Objective-C封装好的函数桥接到Swift</li>
-<li>在Swift中调用前，做好类型转化</li>
-</ul>
-<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><p>这里就以我的华容道为例子了。</p>
-<p>项目结构如下</p>
-<p>其中主要关注**CppSolver.hpp CppSolver.cpp CppWrapper.h CppWrapper.mm Klotski-Bridging-Header.h **即可，这是在Swift调用C++函数中起到关键作用的文件。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://img2022.cnblogs.com/blog/842101/202208/842101-20220819190046463-1696596445.png"
-                     
-                ></p>
-<h3 id="1-写好C-函数"><a href="#1-写好C-函数" class="headerlink" title="1.写好C++函数"></a>1.写好C++函数</h3><p><strong>CppSolver.hpp</strong>如下</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> CppSolver_hpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CppSolver_hpp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="type">int</span> getNum(<span class="type">int</span> x);</span><br><span class="line">    <span class="type">char</span> *solveGame(<span class="type">char</span> *gameString);</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* CppSolver_hpp */</span></span></span><br></pre></td></tr></table></figure></div>
+                <h1 id="C-中的const"><a href="#C-中的const" class="headerlink" title="C++中的const"></a>C++中的const</h1><h2 id="顶层const和底层const"><a href="#顶层const和底层const" class="headerlink" title="顶层const和底层const"></a>顶层const和底层const</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>顶层const代表指针本身是一个常量，而底层const则表示指针指向的对象是一个常量。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p = &amp;a;  <span class="comment">// 底层const， 不能通过*p改变a，又叫指向常量的指针。</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p = &amp;a;  <span class="comment">// 顶层const， p本身的值不能发生改变，又叫常量指针。</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p = &amp;a; <span class="comment">// 顶层const + 底层const </span></span><br></pre></td></tr></table></figure></div>
 
-<p><strong>注意这里的extern “C”</strong></p>
-<p>之前没有加这个，一直报错，上网搜了之后，发现要加上这个。</p>
-<p><strong>CppSolver.cpp</strong>如下</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;CppSolver.hpp&quot;</span></span></span><br><span class="line"><span class="type">char</span> *solveGame(<span class="type">char</span>* gameString) &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        Do Something </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hahahah&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="拷贝操作"><a href="#拷贝操作" class="headerlink" title="拷贝操作"></a>拷贝操作</h3><p>当进行拷贝操作时，顶层const不起作用（拷贝不会改变对象本身的值），但拷入和拷出对象的底层const应该一样，或者可以转化为相同的const类型（非const可以转化为const）。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> b = a; <span class="comment">// 正确，顶层const不起作用</span></span><br><span class="line"><span class="type">int</span> c = a;       <span class="comment">// 正确，顶层const不起作用</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p1 = &amp;a;   <span class="comment">// 正确，底层非const可以转化为底层const</span></span><br><span class="line"><span class="type">int</span> *p2 = p1;         <span class="comment">// 错误，p1的底层const不能转化为底层非const</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p3 = p1;   <span class="comment">// 错误，p1的底层const不能转化为底层非const</span></span><br></pre></td></tr></table></figure></div>
 
-<h3 id="2-使用Objective-C封装C-函数"><a href="#2-使用Objective-C封装C-函数" class="headerlink" title="2.使用Objective-C封装C++函数"></a>2.使用<strong>Objective-C</strong>封装C++函数</h3><p><strong>CppWrapper.h</strong>如下</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> CppWrapper_h</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CppWrapper_h</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#import <span class="string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> CppStruct;</span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CppWrapper</span>: <span class="title">NSObject</span></span></span><br><span class="line">- (<span class="type">char</span> *) solveGame_Wrapped: (<span class="built_in">NSString</span> *) gameString;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* CppWrapper_h */</span></span></span><br></pre></td></tr></table></figure></div>
+<h2 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h2><p>constexpr总是把对象声明为顶层const</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="type">int</span> *p1 = <span class="literal">nullptr</span>; <span class="comment">// 相当于 int* const p1 = nullptr;</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="type">const</span> <span class="type">int</span> *p2 = <span class="literal">nullptr</span>; <span class="comment">// 相当于 const int* const p2 = nullptr;</span></span><br></pre></td></tr></table></figure></div>
 
-<p><strong>CppWrapper.mm</strong>如下</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="string">&quot;CppWrapper.h&quot;</span></span></span><br><span class="line"><span class="meta">#import <span class="string">&quot;CppSolver.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CppWrapper</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="type">int</span>) getNum_Wrapped: (<span class="type">int</span>)x &#123;</span><br><span class="line"><span class="comment">//    struct CppStruct *cs = CppStruct(1, 2);</span></span><br><span class="line">    <span class="keyword">return</span> getNum(x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">char</span> *) solveGame_Wrapped: (<span class="built_in">NSString</span> *) gameString &#123;</span><br><span class="line">    <span class="keyword">return</span> solveGame([gameString UTF8String]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h2><p>在typedef复合类型的时候，不能简单地把typedef展开。下面的例子说明了这一情况。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> *pstring;</span><br><span class="line"><span class="type">const</span> pstring cstr = <span class="number">0</span>;</span><br><span class="line"><span class="type">const</span> pstring *ps;</span><br></pre></td></tr></table></figure></div>
 
-<h3 id="3-把Objective-C封装好的C-函数桥接到Swift"><a href="#3-把Objective-C封装好的C-函数桥接到Swift" class="headerlink" title="3.把Objective-C封装好的C++函数桥接到Swift"></a>3.把Objective-C封装好的C++函数<strong>桥接</strong>到Swift</h3><p>在创建Objective-C文件时，Xcode会提醒是否要建立<strong>桥接文件</strong>，这里我们要选择是，也就是创建了Klotski-Bridging-Header.h：</p>
-<div class="highlight-container" data-rel="Objc"><figure class="iseeu highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Use this file to import your target&#x27;s public headers that you would like to expose to Swift.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="meta">#import <span class="string">&quot;CppWrapper.h&quot;</span></span></span><br></pre></td></tr></table></figure></div>
+<p>在这里，cstr是指向char的常量指针，而ps是一个指针，它指向的对象是一个指向char的常量指针。原因如下：这两条声明语句的基本数据类型都是 const pstring ，const是对给定类型的修饰，而给定的类型是 pstring ，也即 char * ，所以const修饰的是指向char的指针，也即，这个指针是一个常量，因此 const pstring 声明的类型是 char * const 类型。</p>
+<p>这与直接把typedef展开时的理解是完全不同的。直接展开时，const pstring就变成了const char * ，前者的数据类型是指针，而后者的数据类型是char， * 只是声明符的一部分。如果直接展开的话，上述语句就变成了</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> *cstr = <span class="number">0</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> **ps;</span><br></pre></td></tr></table></figure></div>
 
-<h3 id="4-在Swift中调用Objective-C函数"><a href="#4-在Swift中调用Objective-C函数" class="headerlink" title="4.在Swift中调用Objective-C函数"></a>4.在<strong>Swift</strong>中调用Objective-C函数</h3><p>注意做好类型转换</p>
-<div class="highlight-container" data-rel="Swift"><figure class="iseeu highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">solveByPersonControllers</span>(<span class="keyword">_</span> <span class="params">personControllers</span>: [<span class="type">PersonController</span>]) &#123;</span><br><span class="line">        <span class="keyword">let</span> game <span class="operator">=</span> <span class="type">GameStatusForCpp</span>(personControllers: personControllers)</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> gameData <span class="operator">=</span> <span class="keyword">try?</span> <span class="type">JSONEncoder</span>().encode(game) <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">fatalError</span>(<span class="string">&quot;unexpected game status <span class="subst">\(game)</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> gameString <span class="operator">=</span> <span class="type">String</span>(data: gameData, encoding: .utf8) <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">fatalError</span>(<span class="string">&quot;unexpected gameData <span class="subst">\(gameData)</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> cppWrapper <span class="operator">=</span> <span class="type">CppWrapper</span>()</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> solveChars <span class="operator">=</span> cppWrapper.solveGame_Wrapped(gameString) <span class="keyword">else</span> &#123; <span class="built_in">fatalError</span>() &#125;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> solveStr <span class="operator">=</span> <span class="type">String</span>(cString: solveChars, encoding: .utf8) <span class="keyword">else</span> &#123; <span class="built_in">fatalError</span>() &#125;</span><br><span class="line">        <span class="built_in">print</span>(solveStr)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+<p>这样一来，cstr就变成了一个指向char类型常量的指针，ps变成了一个指向const char * 类型的指针。</p>
+<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h2><p>auto一般会忽略掉顶层const和引用，保留底层const。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> ci = <span class="number">1</span>, &amp;cr = ci;</span><br><span class="line"><span class="keyword">auto</span> b = ci;  <span class="comment">// int</span></span><br><span class="line"><span class="keyword">auto</span> c = cr;  <span class="comment">// int</span></span><br><span class="line"><span class="keyword">auto</span> d = &amp;ci; <span class="comment">// const int *，因为对顶层const对象取地址得到底层const</span></span><br></pre></td></tr></table></figure></div>
 
-<h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><p>建议需要用到复杂的数据类型（类、结构体）的时候，可以传递<strong>json字符串</strong>（我上面的代码就是这样做的），因为我暂时还没找到更好的方法可以让Swift和C++使用共同的结构。至于C++的json处理，有一个比较好用的库，是腾讯的<a class="link"   target="_blank" rel="noopener" href="https://github.com/Tencent/rapidjson" >rapidjson <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。<br>C++的返回值类型应该需要是Objective-C和Swift里都有的类型</p>
+<p>当需要auto带顶层const时，应explicly写出。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="keyword">auto</span> &amp;r = <span class="number">1</span>;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h2><p>decltype将会保留变量的顶层const和引用。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> ci = <span class="number">0</span>, &amp;cr = ci;</span><br><span class="line"><span class="keyword">decltype</span>(ci) x = <span class="number">0</span>;  <span class="comment">// const int</span></span><br><span class="line"><span class="keyword">decltype</span>(cr) y = <span class="number">0</span>;  <span class="comment">// const int &amp;</span></span><br><span class="line"><span class="keyword">decltype</span>(cr) z;      <span class="comment">// 错误，类型为const int &amp;，必须绑定到一个对象上</span></span><br></pre></td></tr></table></figure></div>
+
+<p>若decltype接受一个变量，则推断出变量的类型；若接受一个表达式，则分两种情况：</p>
+<ol>
+<li><p>表达式是一个左值，则得到对应类型的引用。（因为可以使用左值得到对应的对象，且能对对象进行赋值，这与引用的功能相同）</p>
+</li>
+<li><p>表达式是一个右值，则得到对应的类型。</p>
+</li>
+</ol>
+<p>若在变量的两边加上一对或多对括号，则变量会被当成是一个表达式，且这个表达式是一个左值，所以一定将得到对应类型的引用。</p>
 
             </div>
 
@@ -281,11 +277,11 @@
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Swift调用C++函数</li>
+        <li>Post title：C/C++中的const</li>
         <li>Post author：Franky</li>
-        <li>Create time：2023-03-09 21:29:06</li>
+        <li>Create time：2023-03-09 21:33:45</li>
         <li>
-            Post link：https://franky.pro/2023/03/09/Swift调用C-函数/
+            Post link：https://franky.pro/2023/03/09/C-C-中的const/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -306,13 +302,13 @@
                         <div class="article-prev">
                             <a class="prev"
                             rel="prev"
-                            href="/2023/03/09/C-C-%E4%B8%AD%E7%9A%84const/"
+                            href="/2023/03/09/Huawei-%E5%AE%89%E5%85%A8%E7%BC%96%E7%A0%81-%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93/"
                             >
                                 <span class="left arrow-icon flex-center">
                                     <i class="fa-solid fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">C/C++中的const</span>
+                                    <span class="post-nav-title-item">Huawei: 安全编码&amp;代码坏味道</span>
                                     <span class="post-nav-item">Prev posts</span>
                                 </span>
                             </a>
@@ -322,10 +318,10 @@
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/03/09/hello-world/"
+                            href="/2023/03/09/Swift%E8%B0%83%E7%94%A8C-%E5%87%BD%E6%95%B0/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">Hello World</span>
+                                    <span class="post-nav-title-item">Swift调用C++函数</span>
                                     <span class="post-nav-item">Next posts</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -346,8 +342,8 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">On this page</div>
-        <div class="page-title">Swift调用C++函数</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift%E8%B0%83%E7%94%A8C-%E5%87%BD%E6%95%B0"><span class="nav-text">Swift调用C++函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%EF%BC%88%E5%8F%AF%E7%95%A5%E8%BF%87%EF%BC%89"><span class="nav-text">背景（可略过）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C"><span class="nav-text">具体操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%86%99%E5%A5%BDC-%E5%87%BD%E6%95%B0"><span class="nav-text">1.写好C++函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8Objective-C%E5%B0%81%E8%A3%85C-%E5%87%BD%E6%95%B0"><span class="nav-text">2.使用Objective-C封装C++函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%8A%8AObjective-C%E5%B0%81%E8%A3%85%E5%A5%BD%E7%9A%84C-%E5%87%BD%E6%95%B0%E6%A1%A5%E6%8E%A5%E5%88%B0Swift"><span class="nav-text">3.把Objective-C封装好的C++函数桥接到Swift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%9C%A8Swift%E4%B8%AD%E8%B0%83%E7%94%A8Objective-C%E5%87%BD%E6%95%B0"><span class="nav-text">4.在Swift中调用Objective-C函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E8%AE%AE"><span class="nav-text">建议</span></a></li></ol></li></ol>
+        <div class="page-title">C/C++中的const</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84const"><span class="nav-text">C++中的const</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B6%E5%B1%82const%E5%92%8C%E5%BA%95%E5%B1%82const"><span class="nav-text">顶层const和底层const</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E6%93%8D%E4%BD%9C"><span class="nav-text">拷贝操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#constexpr"><span class="nav-text">constexpr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typedef"><span class="nav-text">typedef</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#auto"><span class="nav-text">auto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decltype"><span class="nav-text">decltype</span></a></li></ol></li></ol>
 
     </div>
 </div>
