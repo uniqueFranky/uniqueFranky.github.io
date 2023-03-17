@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-03-09T13:36:17.069Z</updated>
+  <updated>2023-03-17T03:32:51.314Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>四种文法类型</title>
+    <link href="http://example.com/2023/03/17/%E5%9B%9B%E7%A7%8D%E6%96%87%E6%B3%95%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://example.com/2023/03/17/%E5%9B%9B%E7%A7%8D%E6%96%87%E6%B3%95%E7%B1%BB%E5%9E%8B/</id>
+    <published>2023-03-17T03:03:57.000Z</published>
+    <updated>2023-03-17T03:32:51.314Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="四种文法类型"><a href="#四种文法类型" class="headerlink" title="四种文法类型"></a>四种文法类型</h1><h2 id="文法分类"><a href="#文法分类" class="headerlink" title="文法分类"></a>文法分类</h2><p>文法类型分为0型、1型、2型、3型，他们都由四部分组成，即 $G&#x3D;(V_T,V_N,S,P)$ ，其中 $V_T$ 为终结符（Terminal）集合， $V_N$ 为非终结符（Nonterminal）集合， $S$ 为文法的开始符号， $P$ 为产生式集合。这四种文法对产生式的限制不同。</p><h2 id="0型"><a href="#0型" class="headerlink" title="0型"></a>0型</h2><ul><li><p>短语文法、图灵机</p></li><li><p>产生式为 $\alpha\rightarrow\beta $ ，其中 $\alpha\in (V_T\cup V_N)^*$ 且至少含有一个 <strong>非终结符</strong> ， $\beta\in (V_T\cup V_N)^*$ 。（集合右上角加星号表示该集合的闭包）</p></li></ul><h2 id="1型"><a href="#1型" class="headerlink" title="1型"></a>1型</h2><ul><li><p>上下文有关文法、线性界限自动机</p></li><li><p>产生式为 $\alpha\rightarrow\beta$ ，其中$|\alpha|\leq|\beta|$ ，仅 $S\rightarrow\epsilon$ 例外。（ $\epsilon$ 表示空集）。</p></li></ul><h2 id="2型"><a href="#2型" class="headerlink" title="2型"></a>2型</h2><ul><li><p>上下文无关文法、非确定下推自动机</p></li><li><p>产生式为 $A\rightarrow\beta$ ，其中 $A\in V_N$ ，$\beta\in (V_T\cup V_N)^*$ 。</p></li><li><p>采用栈式工作结构</p></li></ul><h2 id="3型"><a href="#3型" class="headerlink" title="3型"></a>3型</h2><ul><li><p>正规文法、有限自动机</p></li><li><p>产生式为 $A\rightarrow\alpha B$ 或 $A\rightarrow\alpha$ ，其中 $\alpha\in V_T^*$ ， $A, B\in V_N$ 。</p></li><li><p>产生式右边要么没有非终结符，要么非终结符在最右边，称为右线性文法。</p></li><li><p>类似地，也有左线性文法，这两种文法是等价的。</p></li></ul><h2 id="四种文法的比较"><a href="#四种文法的比较" class="headerlink" title="四种文法的比较"></a>四种文法的比较</h2><p>从0型到3型，描述能力越来越低。</p><ul><li><p>$L&#x3D;{a^nb^n|n\geq1}$ 不能由正规文法产生，但可由上下文无关文法产生：</p><p>$$<br>S\rightarrow aSb|ab<br>$$</p></li><li><p>$L&#x3D;{a^nb^nc^n|n\geq1}<br>$ 不能由上下文无关文法产生，但可由上下文有关文法产生：</p><p>$$<br>S\rightarrow aSBC|aBC<br>$$</p></li></ul><p>$$<br>CB\rightarrow BC<br>$$</p><p>$$<br>aB\rightarrow ab<br>$$</p><p>$$<br>bB\rightarrow bb<br>$$</p><p>$$<br>bC\rightarrow bc<br>$$</p><p>$$<br>cC\rightarrow cc<br>$$</p><p>    可以看到，这种文法的处理方法与上下文有关。</p><h2 id="程序设计语言的文法"><a href="#程序设计语言的文法" class="headerlink" title="程序设计语言的文法"></a>程序设计语言的文法</h2><p>程序设计语言不是上下文无关语言，甚至不是上下文有关语言，只能由0型文法产生。</p><p>但是对于编译程序，仍然使用 <strong>上下文无关文法</strong> 来描述其语言结构，不能用上下文无关文法描述的部分，一般放在语义分析阶段进行，而不是在语法分析阶段。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;四种文法类型&quot;&gt;&lt;a href=&quot;#四种文法类型&quot; class=&quot;headerlink&quot; title=&quot;四种文法类型&quot;&gt;&lt;/a&gt;四种文法类型&lt;/h1&gt;&lt;h2 id=&quot;文法分类&quot;&gt;&lt;a href=&quot;#文法分类&quot; class=&quot;headerlink&quot; title=&quot;文</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Huawei: 现代C++与STL</title>
