@@ -1,3 +1,4 @@
+http://example.com/2023/03/22/code2vec-Learning-Distributed-Representations-of-Code/
 http://example.com/2023/03/17/%E5%9B%9B%E7%A7%8D%E6%96%87%E6%B3%95%E7%B1%BB%E5%9E%8B/
 http://example.com/2023/03/09/Huawei-%E7%8E%B0%E4%BB%A3C-%E4%B8%8ESTL/
 http://example.com/2023/03/09/Huawei-%E5%AE%89%E5%85%A8%E7%BC%96%E7%A0%81-%E4%BB%A3%E7%A0%81%E5%9D%8F%E5%91%B3%E9%81%93/

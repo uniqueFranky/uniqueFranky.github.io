@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="Franky">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/03/22/code2vec-learning-distributed-representations-of-code/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="code2vec: Learning Distributed Representations of Code">
+    <meta property="og:description" content="Hexo Theme Redefine">
+    <meta property="og:url" content="http://example.com2023/03/22/code2vec-Learning-Distributed-Representations-of-Code/">
+    <meta property="og:image" content="/images/redefine-logo.svg">
+    <meta property="og:site_name" content="Franky&#39;s Blog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="code2vec: Learning Distributed Representations of Code">
+    <meta name="twitter:description" content="Hexo Theme Redefine">
+    <meta name="twitter:image" content="/images/redefine-logo.svg">
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
+    <meta name="theme-color" content="#005080">
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+    <title>
+        
+            code2vec: Learning Distributed Representations of Code -
+        
+        Franky&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    
+    
+    
+    
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"https://evan.beee.top/img/wallhaven-wqery6-light.webp","dark":"https://evan.beee.top/img/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"当你在银河目睹着我的平凡，而我在人间甚至不敢抬头看","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.1.6","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
+    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="menu-wrapper">
+    
+    <div class="menu-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Franky&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                            <li class="menu-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="menu-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                    <li class="drawer-menu-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">code2vec: Learning Distributed Representations of Code</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Franky</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2023-03-22 15:45:08</span>
+        <span class="mobile">2023-03-22 15:45</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="pc">2023-03-22 16:39:20</span>
+            <span class="mobile">2023-03-22 16:39</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="code2vec-Learning-Distributed-Representations-of-Code"><a href="#code2vec-Learning-Distributed-Representations-of-Code" class="headerlink" title="code2vec: Learning Distributed Representations of Code"></a>code2vec: Learning Distributed Representations of Code</h1><h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><pre><code>读完这篇paper，第一感觉是：写得太详细（啰嗦）。好多东西翻来覆去讲了好几遍，最后总长度30页，确定不是水字数的？
+
+但是不得不承认，论文里提到的方法很好。
+</code></pre><h3 id="0x01-Introduction"><a href="#0x01-Introduction" class="headerlink" title="0x01 Introduction"></a>0x01 Introduction</h3><pre><code>这篇paper提供了一种学习code的 **Distributed Representation** 的方法，借鉴了 **word2vec** 和 **Attention** 的方法。它使用代码的抽象语法树结构，对代码片段在树上的路径（包括Terminal在内）进行 embedding ，这样得到的 code 的 embedding 可以用来做一些 downstream 的任务，原文做的任务是给出方法的代码，预测方法名。
+</code></pre><h3 id="0x02-AST-Paths"><a href="#0x02-AST-Paths" class="headerlink" title="0x02 AST Paths"></a>0x02 AST Paths</h3><pre><code>对于代码片段 $C$ ，定义它的抽象语法树是一个六元组 $&lt;N, T, X, s, \delta, \phi&gt;$ ，其中 $N$ 代表非终结符（Non-Terminal）集合， $T$ 代表终结符（Terminal）集合， $X$ 代表终结符所对应的值的集合， $s\in N$ 代表语法树的根节点， $\delta: N\rightarrow (N\cup T)^\*$ 是一个从 **非终结符** 到它在语法树上的 **子孙节点** 集合的映射， $\phi:T\rightarrow X$ 是从终结符到它对应的值的映射。
+
+一条 **AST Path** 就是语法树上从一个终结符到另一个终结符之间的路径，中间会经过两终结符的LCA，可以被表示为一个三元组 $&lt;x_s, p, x_t&gt;$ ， $x_s$ 和 $x_t$ 代表两个终结符对应的值， $p$ 代表两个终结符之间的路径（即经过的节点和父子关系，包括这两个终结符）。
+
+如语句
+</code></pre><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">7</span></span><br></pre></td></tr></table></figure></div>
+<pre><code>就可以被表示为 $&lt;x, (NameExpr\uparrow AssignExpr\downarrow IntegerLiteralExpr), 7&gt;$ 。
+</code></pre><h3 id="0x03-Embedding-Model"><a href="#0x03-Embedding-Model" class="headerlink" title="0x03 Embedding Model"></a>0x03 Embedding Model</h3><h4 id="AST-Path-Embedding"><a href="#AST-Path-Embedding" class="headerlink" title="AST Path Embedding"></a>AST Path Embedding</h4><pre><code>一条 AST Path 的 embedding 由它所对应的三元组（两个终结符的值 + 中间路径）所对应的 embedding 连接起来，再经过一个全连接层得到。对于终结符的值和路径的 embedding ，采用 word2vec 的方法，即用 one-hot 向量和 embedding 矩阵作乘法，即可得到对应的 embedding 向量。
+
+具体来说，有 $value\_vocab\in \mathbb&#123;R&#125;^&#123;|X|\times d&#125;$ 和 $path\_vocab\in\mathbb&#123;R&#125;^&#123;|P|\times d&#125;$ 分别代表终结符值的 embedding 矩阵和路径的 embedding 矩阵，矩阵中的每一行代表一个元素的 embedding 向量，每一个 embedding 向量都是 $d$ 维的，这个 $d$ 是 empirical 的 hyperparameter 。用终结符的值/路径 所对应的 one-hot 向量和 embedding 矩阵作乘法，实际就是选出 embedding 矩阵中对应的那一行，作为其 embedding 向量。
+
+将这三个向量连接起来，得到 $c\in\mathbb&#123;R&#125;^&#123;3d&#125;$ ，再与 $W\in\mathbb&#123;R&#125;^&#123;d\times 3d&#125;$ 作乘法，即经过一个全连接层，在经过 $tanh$ 作为激活层，即得到 $c&#39;=tanh(W\cdot c)$ 作为一条 AST Path 的 embedding。
+</code></pre><h4 id="Code-Snippet-Embedding"><a href="#Code-Snippet-Embedding" class="headerlink" title="Code Snippet Embedding"></a>Code Snippet Embedding</h4><pre><code>在得到代码片段中所有 AST Path 的 embedding 之后，对每条 AST Path 进行 Attention 操作，得到 attention weight ，将所有 AST Path 的 embedding 按照这个 attention weight 进行加权求和，得到整个代码段的 embedding 。
+
+具体来说，我们有一个全局的 attention 向量 $a\in\mathbb&#123;R&#125;^d$ ，将每个 AST Path 的 embedding 和这个 attention 向量作 **softmax** ，即可得到 attention weight 。那么什么是 softmax ？
+
+**softmax** 是指，对于得到的 AST Path 的 embedding 们 $&#123;c&#39;_1, c&#39;_2, ...,c&#39;_n&#125;$ ，通过下面的式子可以计算得到一个值 $\alpha_i=\frac&#123;exp(c&#39;^T_i\cdot a)&#125;&#123;\sum_&#123;j=1&#125;^n exp(c&#39;^T_j\cdot a)&#125;$ ，这个值满足 $\sum_&#123;i=1&#125;^n\alpha_i = 1$ ，也就是可以看成一个概率分布。在这里，我们把它作为加权值，来计算代码段的 embedding 。
+
+我们将每条 AST Path 对应的 embedding $c&#39;_i$ 和它对应的加权值 $alpha_i$ 乘起来，再相加，得到整个代码片段的 embedding，即 $v=\sum_&#123;i=1&#125;^n\alpha_i\cdot c&#39;_i$ 。
+</code></pre><h4 id="Label-Embedding"><a href="#Label-Embedding" class="headerlink" title="Label Embedding"></a>Label Embedding</h4><pre><code>对于每个代码段的标签（在这里就是这个方法对应的方法名），也采用 word2vec 的方法对其进行 embedding ，即有 $tags\_vocab\in\mathbb&#123;R&#125;^&#123;|Y|\times d&#125;$ ，将标签对应的 one-hot 向量与这个 embedding 矩阵相乘，得到对应的 embedding。
+</code></pre><h3 id="0x04-Prediction-Model"><a href="#0x04-Prediction-Model" class="headerlink" title="0x04 Prediction Model"></a>0x04 Prediction Model</h3><pre><code>在得到代码段和各个标签的 embedding 以后，我们需要预测这个代码段是每个标签的概率。我们这样计算代码段 $C$ 的标签是 $y_i$ 的概率： $q(y_i) = \frac&#123;exp(v^T\cdot tags\_vocab_i)&#125;&#123;\sum_&#123;y_j\in Y&#125;exp(v^T\cdot tags\_vocab_j)&#125;$ ，其中 $Y$ 是标签集合。也就是用代码段的 embedding 和标签的 embedding 作 **softmax** ，之前提到过，这样的值可以作为一个概率分布， $\sum_&#123;y_i\in Y&#125;q(y_i) = 1$ 。
+</code></pre><h3 id="0x05-Training"><a href="#0x05-Training" class="headerlink" title="0x05 Training"></a>0x05 Training</h3><pre><code>使用交叉熵损失（Cross Entropy Loss）作为损失函数。 $Loss = -\sum_&#123;y\in Y&#125;p(y)\log q(y)$ ，其中 $p(y)$ 是真实的概率分布中， $y$ 这一分量的概率， $q(y)$ 是模型预测中 $y$ 这一分量的概率。由于我们的标签都是 one-hot 向量，只有一个分量的概率为 $1$ ，其他分量均为 $0$ ，所以交叉熵损失在形式上和对率回归一样，即 $Loss=-\log q(y)$ 。
+
+使用反向传播机制+梯度下降算法，即可完成模型训练。
+</code></pre>
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：code2vec: Learning Distributed Representations of Code</li>
+        <li>Post author：Franky</li>
+        <li>Create time：2023-03-22 15:45:08</li>
+        <li>
+            Post link：https://franky.pro/2023/03/22/code2vec-Learning-Distributed-Representations-of-Code/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/03/17/%E5%9B%9B%E7%A7%8D%E6%96%87%E6%B3%95%E7%B1%BB%E5%9E%8B/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">四种文法类型</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">code2vec: Learning Distributed Representations of Code</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#code2vec-Learning-Distributed-Representations-of-Code"><span class="nav-text">code2vec: Learning Distributed Representations of Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-Introduction"><span class="nav-text">0x01 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-AST-Paths"><span class="nav-text">0x02 AST Paths</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-Embedding-Model"><span class="nav-text">0x03 Embedding Model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AST-Path-Embedding"><span class="nav-text">AST Path Embedding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-Snippet-Embedding"><span class="nav-text">Code Snippet Embedding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Label-Embedding"><span class="nav-text">Label Embedding</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x04-Prediction-Model"><span class="nav-text">0x04 Prediction Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x05-Training"><span class="nav-text">0x05 Training</span></a></li></ol></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">Franky</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br> 
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.1.6</a>
+        </div>
+        
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="
+                
+                https://beian.miit.gov.cn
+                
+                ">豫ICP备2022020092号</a></div>
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="
+                
+                    https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41031102000540
+                
+                ">豫公网安备41031102000540号</a></div>
+        
+        
+        
+            <div id="start_time_div" style="display:none">
+                2023/3/9 20:00:00
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="unfolded-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="folded-tools-list">
+        <li class="right-bottom-tools tool-toggle-show flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/menu-shrink.js"></script>
+
+<script src="/js/tools/go-top-bottom.js"></script>
+
+<script src="/js/tools/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/code-block.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
