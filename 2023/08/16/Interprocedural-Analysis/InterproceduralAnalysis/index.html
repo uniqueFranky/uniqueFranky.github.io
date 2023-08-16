@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="Franky">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/08/16/interprocedural-analysis/interproceduralanalysis/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Hexo">
+    <meta property="og:description" content="Hexo Theme Redefine">
+    <meta property="og:url" content="http://example.com2023/08/16/Interprocedural-Analysis/InterproceduralAnalysis/">
+    <meta property="og:image" content="/images/redefine-logo.svg">
+    <meta property="og:site_name" content="Franky&#39;s Blog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hexo">
+    <meta name="twitter:description" content="Hexo Theme Redefine">
+    <meta name="twitter:image" content="/images/redefine-logo.svg">
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
+    <meta name="theme-color" content="#005080">
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+    <title>
+        
+        Franky&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    
+    
+    
+    
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"https://evan.beee.top/img/wallhaven-wqery6-light.webp","dark":"https://evan.beee.top/img/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"当你在银河目睹着我的平凡，而我在人间甚至不敢抬头看","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.1.6","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
+    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="menu-wrapper">
+    
+    <div class="menu-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Franky&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                            <li class="menu-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="menu-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                    <li class="drawer-menu-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular"></h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Franky</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2023-08-16 19:17:09</span>
+        <span class="mobile">2023-08-16 19:17</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="pc">2023-08-16 20:11:59</span>
+            <span class="mobile">2023-08-16 20:11</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="Interprocedural-Analysis"><a href="#Interprocedural-Analysis" class="headerlink" title="Interprocedural Analysis"></a>Interprocedural Analysis</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>之前在做 Infraprocedural Analysis 时（lab2），将函数调用的返回值和函数的参数直接保守估计为了 NAC ， Interprocedural Analysis 的目标就是得到更高的分析精度。为了实施过程间分析，需要首先得到程序的 <strong>调用图 Call Graph</strong> 。</p>
+<h2 id="Call-Graph-Construction-using-Class-Hierarchy-Analysis-CHA"><a href="#Call-Graph-Construction-using-Class-Hierarchy-Analysis-CHA" class="headerlink" title="Call Graph Construction using Class Hierarchy Analysis(CHA)"></a>Call Graph Construction using Class Hierarchy Analysis(CHA)</h2><h3 id="Call-Graph"><a href="#Call-Graph" class="headerlink" title="Call Graph"></a>Call Graph</h3><p>调用图是一种由方法之间的调用关系组成的图，即由从 <strong>call sites</strong> 到 <strong>target methods(callees)</strong> 之间的边组成。构建调用图的常用算法有：</p>
+<ol>
+<li><p>Class Hierarchy Analysis (CHA)</p>
+</li>
+<li><p>Rapid Type Analysis (RTA)</p>
+</li>
+<li><p>Variable Type Analysis (VTA)</p>
+</li>
+<li><p>Pointer Analysis (k-CFA)</p>
+</li>
+</ol>
+<p>这些算法从上到下越来越精确，但是也越来越慢。</p>
+<h3 id="Java-中的方法调用"><a href="#Java-中的方法调用" class="headerlink" title="Java 中的方法调用"></a>Java 中的方法调用</h3><p>Java 中方法调用分为三类：</p>
+<ol>
+<li><p>Static Call, invokestatic ，即调用某个类的静态方法，不需要 instance 即可调用，可在编译期确定目标方法</p>
+</li>
+<li><p>Special Call, invokespecial ， 包括调用 <strong>类的构造函数</strong> 、 <strong>instance 的私有方法</strong> 、 <strong>父类的方法</strong> 这三种，可以在编译期确定目标方法</p>
+</li>
+<li><p>Virtual Call, invokeinterface/invokevirtual ， 调用其他 instance 方法均属于该类型，可能有多个目标方法（多态），只能在运行期间确定目标方法。</p>
+</li>
+</ol>
+<p>前两类调用都很简单，因此构造调用图的关键在于 Virtual Call 。</p>
+<h3 id="Method-Dispatch-of-Virtual-Calls"><a href="#Method-Dispatch-of-Virtual-Calls" class="headerlink" title="Method Dispatch of Virtual Calls"></a>Method Dispatch of Virtual Calls</h3><p>在运行期间， Virtual Call $o^1.foo^(\dots)^2$ 根据以下两个信息被解析：</p>
+<ol>
+<li><p>$o$ 指向的对象的类型</p>
+</li>
+<li><p>call site 的方法签名(Signature)</p>
+</li>
+</ol>
+<p>其中， </p>
+<ul>
+<li><p>签名 Signature = 类名 Class Type + 方法名 Method Name + 描述符 Descriptor</p>
+</li>
+<li><p>描述符 Descriptor = 返回值类型 Return Type + 参数类型 Parameter Types</p>
+</li>
+</ul>
+<p>如：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    T <span class="title function_">foo</span><span class="params">(P p, Q q, R r)</span> &#123; … &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>该方法的签名为 $<C:T\ foo(P,Q,R)>$ 。</p>
+<p>一个签名可以唯一确定一个方法。</p>
+<p>当解析一个 Virtual Call 时，采用以下分配函数 $Dispatch$ 来决定其调用的目标方法：</p>
+<script type="math/tex; mode=display">
+Dispatch(c,m)=
+\begin{cases}
+m^{'}, 若 c 中存在非抽象方法 m^{'} 与 m 有相同的方法名和描述符
+\\
+Dispath(c^{'},m), 若不满足上述条件。其中c^{'}是c的父类
+\end{cases}</script><p>例：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="VirtualCallDispath.png"
+                      alt=""
+                ></p>
+<h3 id="Class-Hierarchy-Analysis-CHA"><a href="#Class-Hierarchy-Analysis-CHA" class="headerlink" title="Class Hierarchy Analysis (CHA)"></a>Class Hierarchy Analysis (CHA)</h3><p>根据 receiver variable 的声明类型和类之间的继承关系来求解 callees 。该算法假设声明类型为 $A$ 的变量可以指向 $A$ 及 $A$ 的所有子类（包括子类的子类）类型的变量。</p>
+<p>具体算法如下：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="CallResolutionOfCha.png"
+                      alt=""
+                ></p>
+<ul>
+<li><p>对于 Static Call ，可以立即得到其调用的目标方法</p>
+</li>
+<li><p>对于 Special Call ，实例的私有方法和构造函数均可直接得到目标方法；而调用父类方法时需要对父类进行 Dispatch ， 因为可能父类中对应的方法也继承自它的父类。为了统一这两种情况，于是均对 $c^m$ 进行 Dispatch ， 前一种情况的 $c^m$ 即为该类自己，后一种情况的 $c^m$ 为其父类。</p>
+</li>
+<li><p>对于 Virtual Call ，由于假设其可以指向其自身以及其所有子类的类型，所以需要对 <strong>其自身和所有子类</strong> 均进行 Dispatch ，可能会得到多个目标方法。</p>
+</li>
+</ul>
+<p>如下图所示：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="ChaExample.png"
+                      alt=""
+                ></p>
+<p>对于图中的 $b$ ，即使已经确定了它的类型是 $B$ ，即它的目标方法只会有 $A.foo()$ ，但是 CHA 仍然认为其可能的目标方法包括 $A.foo(),C.foo(),D.foo()$ ，因为 CHA 只关注变量的声明类型，而不关注其真实类型。 在解析 $b$ 时，会对它的声明类型 $B$ 和 $B$ 的所有子类 $C,D$ 进行 Dispatch ，最终得到结果。</p>
+<h3 id="Call-Graph-Construction"><a href="#Call-Graph-Construction" class="headerlink" title="Call Graph Construction"></a>Call Graph Construction</h3><p>有了解析目标方法的算法后，就可以开始构建调用图了。其算法如下：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="CallGraphConstructionAlgorithm.png"
+                      alt=""
+                ></p>
+<p>该算法较为简单，只需要从 call site 向其所有的 target methods 连边。被该算法处理过的方法会被加入 Reachable Methods 集合中，即在程序运行过程中可能会执行到的方法。</p>
+<h2 id="Interprocedural-Control-Flow-Graph-ICFG"><a href="#Interprocedural-Control-Flow-Graph-ICFG" class="headerlink" title="Interprocedural Control Flow Graph (ICFG)"></a>Interprocedural Control Flow Graph (ICFG)</h2><p>CFG 表示单个方法内部的结构，而 ICFG 表示整个程序的结构。 ICFG 由多个 CFG 和 CFG 之间的调用/返回边 Call/Return Edges 构成。其中，调用边从 call site 指向目标方法的 entry ，而返回边从目标方法的 exit 指向调用语句的下一条语句 return site 。</p>
+<p>虽然有了从 call site 到被调用方法 和 从被调用方法到 return site 的边，已经可以将程序的结构表示出来了，但是我们还需要加上从 call site 到 return site 的边，以方便 local data flow 的传递，具体将在下一节解释。</p>
+<h2 id="Interprocedural-Data-Flow-Analysis"><a href="#Interprocedural-Data-Flow-Analysis" class="headerlink" title="Interprocedural Data Flow Analysis"></a>Interprocedural Data Flow Analysis</h2><p>过程间数据流分析在 ICFG 上进行，除了需要用到 Node Transfer Function 以外，还需要 Edge Transfer Function 在调用和返回时传递数据流。</p>
+<ul>
+<li><p>Call Edge Transfer: 从 call site 到 callee 的 entry 传递参数</p>
+</li>
+<li><p>Return Edge Transfer: 从 callee 的 exit 到 return site 传递返回值</p>
+</li>
+</ul>
+<p>此外，在 Node Transfer Function 中，若涉及到 $a=functionCall()$ ，则需要将 $a$ 从其 OUT 中 kill 掉，以防止其和 Return Edge Transfer 的结果冲突（实际上Node Transfer 的结果应该被 Return Edge Transfer 的结果覆盖掉）。</p>
+<p>例：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="InterprocuduralConstantPropagation.png"
+                      alt=""
+                ></p>
+<p>图中的虚线即 call-to-return edge ，这种边的存在使得本地的数据流可以不必绕着 callee 转一圈再回到 return site ，而是直接从 call site 传递到 return site ，可以提高分析效率。</p>
+<p>此外，在 $b=ten()$ 的 Node Transfer 中，若不 kill 掉 $b$ ，则其 OUT $b=7$ 和 Return Edge Transfer 的结果 $b=10$ 将会冲突，导致将 $b$ 分析为 NAC ，但实际上 $b=7$ 的结果会被 $b=10$ 覆盖，因此需要 kill 掉。</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：</li>
+        <li>Post author：Franky</li>
+        <li>Create time：2023-08-16 19:17:09</li>
+        <li>
+            Post link：https://franky.pro/2023/08/16/Interprocedural-Analysis/InterproceduralAnalysis/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/08/16/Interprocedural-Analysis/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Interprocedural Analysis</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/08/15/Data-Flow-Analysis-Foundations/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Data Flow Analysis Foundations</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title"></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Interprocedural-Analysis"><span class="nav-text">Interprocedural Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Call-Graph-Construction-using-Class-Hierarchy-Analysis-CHA"><span class="nav-text">Call Graph Construction using Class Hierarchy Analysis(CHA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Call-Graph"><span class="nav-text">Call Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="nav-text">Java 中的方法调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method-Dispatch-of-Virtual-Calls"><span class="nav-text">Method Dispatch of Virtual Calls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Hierarchy-Analysis-CHA"><span class="nav-text">Class Hierarchy Analysis (CHA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Call-Graph-Construction"><span class="nav-text">Call Graph Construction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interprocedural-Control-Flow-Graph-ICFG"><span class="nav-text">Interprocedural Control Flow Graph (ICFG)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interprocedural-Data-Flow-Analysis"><span class="nav-text">Interprocedural Data Flow Analysis</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">Franky</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br> 
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.1.6</a>
+        </div>
+        
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="
+                
+                https://beian.miit.gov.cn
+                
+                ">豫ICP备2022020092号</a></div>
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="
+                
+                    https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41031102000540
+                
+                ">豫公网安备41031102000540号</a></div>
+        
+        
+        
+            <div id="start_time_div" style="display:none">
+                2023/3/9 20:00:00
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="unfolded-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="folded-tools-list">
+        <li class="right-bottom-tools tool-toggle-show flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/menu-shrink.js"></script>
+
+<script src="/js/tools/go-top-bottom.js"></script>
+
+<script src="/js/tools/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/code-block.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
