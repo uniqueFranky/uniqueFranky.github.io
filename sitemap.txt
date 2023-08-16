@@ -1,5 +1,4 @@
 http://example.com/2023/08/16/Interprocedural-Analysis/
-http://example.com/2023/08/16/Interprocedural-Analysis/InterproceduralAnalysis/
 http://example.com/2023/08/15/Data-Flow-Analysis-Foundations/
 http://example.com/2023/08/12/Data-Flow-Analysis-Applications/
 http://example.com/2023/04/17/Stack-Augmented-LSTM/
