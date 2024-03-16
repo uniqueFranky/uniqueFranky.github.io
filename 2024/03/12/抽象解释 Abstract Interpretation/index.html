@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="Franky">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2024/03/12/抽象解释 abstract interpretation/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Hexo">
+    <meta property="og:description" content="Hexo Theme Redefine">
+    <meta property="og:url" content="http://example.com2024/03/12/抽象解释 Abstract Interpretation/">
+    <meta property="og:image" content="/images/redefine-logo.svg">
+    <meta property="og:site_name" content="Franky&#39;s Blog">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hexo">
+    <meta name="twitter:description" content="Hexo Theme Redefine">
+    <meta name="twitter:image" content="/images/redefine-logo.svg">
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
+    <meta name="theme-color" content="#005080">
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+    <title>
+        
+        Franky&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    
+    
+    
+    
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"https://evan.beee.top/img/wallhaven-wqery6-light.webp","dark":"https://evan.beee.top/img/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"当你在银河目睹着我的平凡，而我在人间甚至不敢抬头看","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.1.6","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
+    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="menu-wrapper">
+    
+    <div class="menu-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Franky&#39;s Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                            <li class="menu-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="menu-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                    <li class="drawer-menu-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular"></h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Franky</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2024-03-12 18:43:45</span>
+        <span class="mobile">2024-03-12 18:43</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="pc">2024-03-16 18:46:47</span>
+            <span class="mobile">2024-03-16 18:46</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="抽象解释-Abstract-Interpretation"><a href="#抽象解释-Abstract-Interpretation" class="headerlink" title="抽象解释 Abstract Interpretation"></a>抽象解释 Abstract Interpretation</h1><h2 id="伽罗瓦连接-Galois-Connection"><a href="#伽罗瓦连接-Galois-Connection" class="headerlink" title="伽罗瓦连接 Galois Connection"></a>伽罗瓦连接 Galois Connection</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>伽罗瓦连接定义在两个偏序集 $(A,\leq)$ 、 $(B,\leq)$ 上，由这两个偏序集以及两个函数： $F: A\rightarrow B$ 和 $G: B\rightarrow A$ 组成。当满足 $F(a)\leq b$ 当且仅当 $a\leq G(b)$ 时，称其构成伽罗瓦连接。</p>
+<h3 id="应用在抽象解释上"><a href="#应用在抽象解释上" class="headerlink" title="应用在抽象解释上"></a>应用在抽象解释上</h3><p>设具体域为 $D$ ，抽象域为 $A$ ，抽象化函数 $\alpha: D\rightarrow A$ 将程序的具体状态映射为某一抽象状态，具体化函数 $\gamma: A\rightarrow D$ 将某一抽象状态映射为具体状态。通常而言，程序的具体状态是其状态分量所构成的集合，也即 $D$ 是集合的集合。</p>
+<p>若满足 $\forall X\in D, Y\in A$ 有 $\alpha(X)\leq Y \Leftrightarrow X\leq\gamma(Y)$ 成立，则该抽象构成伽罗瓦连接。该条件可以理解为，左侧的抽象化函数可以移到右边变成具体化函数，右侧的具体化函数可以移到左边变成抽象化函数。</p>
+<p>上述条件与以下四个条件的合取等价：</p>
+<ul>
+<li><p>$\alpha$ 是单调函数，即 $\forall x,y\in D \wedge x\leq y$ 有 $\alpha(x)\leq\alpha(y)$ </p>
+</li>
+<li><p>$\gamma$ 是单调函数，即 $\forall x,y \in A \wedge x\leq y$ 有 $\gamma(x)\leq\gamma(y)$ </p>
+</li>
+<li><p>$\alpha\circ\gamma$ 不变或缩小输入，即 $\forall x\in D$ 有 $\alpha\circ\gamma(x)\leq x$ </p>
+</li>
+<li><p>$\gamma\circ\alpha$ 不变或增大输入，即 $\forall y\in A$ 有 $y\leq\gamma\circ\alpha(y)$  </p>
+</li>
+</ul>
+<p>第四个条件是说，把一个具体值先抽象再具象，得到的具体值将必定包含运算前的具体值，这是 intuitive 的保证抽象 soundness 的要求；第三个条件是 $\leq$ 而不是 $=$ 是为了数学上的美观，在实际中使用的 $\alpha\circ\gamma$ 即将一个抽象值先具象再抽象，将会得到运算前的抽象值。</p>
+<p>下面来证明伽罗瓦连接的定义与上述四个条件的合取是等价的。</p>
+<p>先证定义 $\rightarrow$ 四个条件的合取：</p>
+<ul>
+<li><p>$\forall x\in D$ 有 $\alpha(x)\leq\alpha(x)$ ，将左侧的抽象化函数移到右侧，得到 $x\leq\gamma(\alpha(x))$ ，即 $x\leq\gamma\circ\alpha(x)$ ，第四个条件得证</p>
+</li>
+<li><p>$\forall x\in A$ 有 $\gamma(x)\leq\gamma(x)$ ，将右侧的具体化函数移到左侧，得到 $\alpha(\gamma(x))\leq x$ ，即 $\alpha\circ\gamma(x)\leq x$ ，第三个条件得证</p>
+</li>
+<li><p>$\forall x,y \in D$ ，若有 $x \leq y$ ，则有 $x \leq y\leq \gamma(\alpha(y))$ ，将右侧的具体化函数移到左侧，得到 $\alpha(x)\leq\alpha(y)$ ，第一个条件得证</p>
+</li>
+<li><p>$\forall x,y\in A$ ，若有 $x\leq y$ ，则有 $\alpha(\gamma(x))\leq x\leq y$ ，将左侧的抽象画函数移到右侧，得到 $\gamma(x)\leq\gamma(y)$ ，第二个条件得证</p>
+</li>
+</ul>
+<p>再证四个条件的合取 $\rightarrow$ 定义：</p>
+<p>需要证明 $\alpha(x)\leq y\rightarrow x\leq \gamma(y)$ 和 $x\leq\gamma(y)\rightarrow \alpha(x)\leq y$ </p>
+<ul>
+<li><p>先证前者，左右同时具体化，由具体化函数的单调性，得 $\gamma(\alpha(x))\leq\gamma(y)$ ，又由 $x\leq \gamma(\alpha(x))$ ，得 $x\leq \gamma(y)$ ，得证</p>
+</li>
+<li><p>再证后者，左右同时抽象化，由抽象化函数的单调性，得 $\alpha(x)\leq\alpha(\gamma(y))$ ，又由 $\alpha(\gamma(y))\leq y$ ，得 $\alpha(x)\leq y$ ，得证</p>
+</li>
+</ul>
+<p>综上，定义和上述四个条件的合取是等价的</p>
+<h2 id="函数抽象"><a href="#函数抽象" class="headerlink" title="函数抽象"></a>函数抽象</h2><p>在 $D$ 和 $A$ 的伽罗瓦连接上，若有 $D$ 上的函数 $f: D\rightarrow D$ 和 $A$ 上的函数 $g: A\rightarrow A$ ，$$考虑以下情况：</p>
+<ol>
+<li><p>$\alpha\circ f\circ\gamma(x)\leq g(x)$ ，则 $g$ 是 $f$ 的 <strong>安全抽象</strong></p>
+</li>
+<li><p>$\alpha\circ f\circ\gamma(x)=g(x)$ ，则 $g$ 是 $f$ 的 <strong>最佳抽象</strong></p>
+</li>
+<li><p>$f\circ\gamma(x)=\gamma\circ g(x)$ ，则 $g$ 是 $f$ 的 <strong>精确抽象</strong></p>
+</li>
+</ol>
+<p>函数的最佳抽象总是存在，但精确抽象不一定存在</p>
+<h2 id="形式语义"><a href="#形式语义" class="headerlink" title="形式语义"></a>形式语义</h2><h3 id="语法-vs-语义"><a href="#语法-vs-语义" class="headerlink" title="语法 vs 语义"></a>语法 vs 语义</h3><ul>
+<li><p>语法：刻画程序的书写方法</p>
+</li>
+<li><p>语义：刻画程序所执行的具体操作</p>
+</li>
+</ul>
+<p>语法正确的程序不一定有合法的语义(Aoi Sora)</p>
+<h3 id="三大语义体系"><a href="#三大语义体系" class="headerlink" title="三大语义体系"></a>三大语义体系</h3><ul>
+<li><p>操作语义：描述语句对程序状态的改变（寄存器等）</p>
+</li>
+<li><p>指称语义：把语句描述成从输入状态到输出状态之间的函数</p>
+</li>
+<li><p>公理语义：描述执行语句之前输入所需要满足的条件，以及执行语句后输出会满足的条件（类似于SML函数前面的require、promise）</p>
+</li>
+</ul>
+<p>考虑语句 $a = b + 1$ ，用指称语义可以描述为 $f(x) = x[a\mapsto x[b]+1]$ ，这里的 $x$ 是输入状态，即将输入状态中 $a$ 的值更改为输入状态中 $b$ 的值 $+1$ ，得到输出状态，从而将输入状态映射为输出状态。</p>
+<h2 id="数据流分析的安全性"><a href="#数据流分析的安全性" class="headerlink" title="数据流分析的安全性"></a>数据流分析的安全性</h2><p>设具体域 $D$ 是所有程序的可能状态的状态集合的全集，即是集合的集合，抽象域 $A$ 是具体状态的近似， $D$ 和 $A$ 构成伽罗瓦连接。</p>
+<p>考虑程序的指称语义，对于原子语句 $S_i$ ，令 $f_i$ 表示该原子语句的具体语义， $g_i$ 是其安全抽象。我们尝试论证，所有路径结果的合并是安全的。</p>
+<p>先证明单条路径的安全性：</p>
+<p>只需证 $g_2\circ g_1$ 是 $f_2 \circ f_1$ 的安全抽象，更多函数的复合可以归纳推导。</p>
+<p>由 $g_1$ 的安全性，有 $\alpha\circ f_1\circ \gamma(x)\leq g_1(x)$ ，将左侧的抽象化函数移到右侧，得 $f_1\circ \gamma(x)\leq \gamma\circ g_1(x)$ ，再由 $\alpha$ 和 $f_2$ 的单调性，有 $\alpha\circ f_2\circ f_1\circ\gamma(x) \leq \alpha\circ f_2\circ\gamma\circ g_1(x)$ ，由 $g_2$ 的安全性，有 $\alpha\circ f_2\circ\gamma\circ g_1(x)\leq g_2\circ g_1(x)$ ，即 $\alpha\circ f_2\circ f_1\circ \gamma(x)\leq g_2\circ g_1(x)$ ，因此 $g_2\circ g_1$ 是 $f_2\circ f_1$ 的安全抽象。</p>
+<p>再证明多条路径合并的安全性：</p>
+<p>对于给定程序 $S$ ，设其指称语义为 $f$ ，定义路径提取函数 $p(S)$ ，其返回程序 $S$ 中的所有路径，设该路径所对应的指称语义 $f<em>n\circ f</em>{n-1}\circ \cdots\circ f<em>1$ ，定义函数 $g(x)=\sqcup</em>{f<em>n\circ f</em>{n-1}\cdots f<em>1\in p(S)}g_n\circ g</em>{n-1}\circ\cdots g_1(x)$ ， 则 $g$ 是 $f$ 的安全抽象。证明如下：</p>
+<p>$\forall a\in A$ ，必然存在 $f<em>n\circ f</em>{n-1}\circ\cdots\circ f_1\in p(S)$ ，使得 ：</p>
+<p>$f(\gamma(a)) = f<em>n\circ f</em>{n-1}\circ\cdots\circ f_1(\gamma(a))$ </p>
+<p>由 $g<em>n\circ g</em>{n-1}\circ\cdots\circ g_1$ 的安全性，有：</p>
+<p>$\alpha\circ f<em>n\circ f</em>{n-1}\circ\cdots\circ f<em>1\circ\gamma(a)\leq g_n\circ g</em>{n-1}\circ\cdots\circ g<em>1(a) \leq g_n\circ g</em>{n-1}\circ\cdots\circ g_1(a) \sqcup g(a)=g(a)$ </p>
+<p>将左侧的抽象函数移到右侧，得到 $f<em>n\circ f</em>{n-1}\circ\cdots\circ f_1\circ\gamma(a)\leq\gamma\circ g(a)$ ，即 $f\circ\gamma(a)\leq\gamma\circ g(a)$ ，再将右侧的具体化函数移到左侧，得到 $\alpha\circ f\circ \gamma(a)\leq g(a)$ ，因此 $g$ 是 $f$ 的安全抽象。</p>
+<h2 id="关系抽象"><a href="#关系抽象" class="headerlink" title="关系抽象"></a>关系抽象</h2><p>之前实现的符号分析、区间分析等分析并不考虑各个变量之间的约束条件。</p>
+<p>以区间分析为例，考虑 $x$ 和 $y$ 两个变量的取值范围，若维护 $x$ 和 $y$ 的上界和下界，则可以视为将区间抽象为了一个矩形；若维护 $x,y,x+y,x-y$ 的上界和下界，则可以将区间抽象为一个八边形，有时可以得到更精确的分析结果。</p>
+<p>除了矩形、八边形，还能用椭圆、指数等形状来进行抽象</p>
+<h2 id="谓词抽象"><a href="#谓词抽象" class="headerlink" title="谓词抽象"></a>谓词抽象</h2><p>用一系列布尔表达式的值作为抽象域，比如符号分析可以用谓词抽象表达：</p>
+<p>对于任意变量 $x$ ，有以下三种谓词：</p>
+<ul>
+<li><p>$x&lt;0$</p>
+</li>
+<li><p>$x=0$</p>
+</li>
+<li><p>$x&gt;0$</p>
+</li>
+</ul>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：</li>
+        <li>Post author：Franky</li>
+        <li>Create time：2024-03-12 18:43:45</li>
+        <li>
+            Post link：https://franky.pro/2024/03/12/抽象解释 Abstract Interpretation/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2024/03/16/%E6%8A%BD%E8%B1%A1%E8%A7%A3%E9%87%8A-Abstract-Interpretation/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">抽象解释 Abstract Interpretation</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/08/16/Interprocedural-Analysis/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Interprocedural Analysis</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title"></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E8%A7%A3%E9%87%8A-Abstract-Interpretation"><span class="nav-text">抽象解释 Abstract Interpretation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%BD%E7%BD%97%E7%93%A6%E8%BF%9E%E6%8E%A5-Galois-Connection"><span class="nav-text">伽罗瓦连接 Galois Connection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%A8%E6%8A%BD%E8%B1%A1%E8%A7%A3%E9%87%8A%E4%B8%8A"><span class="nav-text">应用在抽象解释上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%8A%BD%E8%B1%A1"><span class="nav-text">函数抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%A2%E5%BC%8F%E8%AF%AD%E4%B9%89"><span class="nav-text">形式语义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-vs-%E8%AF%AD%E4%B9%89"><span class="nav-text">语法 vs 语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%A4%A7%E8%AF%AD%E4%B9%89%E4%BD%93%E7%B3%BB"><span class="nav-text">三大语义体系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-text">数据流分析的安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E6%8A%BD%E8%B1%A1"><span class="nav-text">关系抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%93%E8%AF%8D%E6%8A%BD%E8%B1%A1"><span class="nav-text">谓词抽象</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">Franky</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br> 
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.1.6</a>
+        </div>
+        
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="
+                
+                https://beian.miit.gov.cn
+                
+                ">豫ICP备2022020092号</a></div>
+            <div class="icp-info info-item"><a target="_blank" rel="nofollow" href="
+                
+                    https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41031102000540
+                
+                ">豫公网安备41031102000540号</a></div>
+        
+        
+        
+            <div id="start_time_div" style="display:none">
+                2023/3/9 20:00:00
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="unfolded-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="folded-tools-list">
+        <li class="right-bottom-tools tool-toggle-show flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/menu-shrink.js"></script>
+
+<script src="/js/tools/go-top-bottom.js"></script>
+
+<script src="/js/tools/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/code-block.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
