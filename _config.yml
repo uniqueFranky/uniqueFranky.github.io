@@ -7,7 +7,7 @@
 # server process.
 
 # Basic Site Settings
-locale                   : "zh-CN"
+locale                   : "en-US"
 title                    : "Runbang Yan / uniqueFranky"
 title_separator          : "-"
 name                     : &name "Runbang Yan"
@@ -62,7 +62,7 @@ author:
   medium           : # URL
   pinterest        : # Username
   soundcloud       : # Username
-  steam            : "1218736432"
+  steam            : "uniqueFranky"
   telegram         : # URL
   tumblr           : # Username
   twitter          : # Username for X / Twitter
